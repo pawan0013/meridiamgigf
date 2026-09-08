@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIGF Intelligence — Meridiam</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1a2744;--navy-d:#141f36;--navy-h:#24314f;--nb:#2c3a58;
+  --blue:#2563b8;--blue-l:#3b82d4;--accent:#16b8a6;--accent-d:#0e9384;
+  --bg:#f4f7fb;--white:#fff;--text:#1a2744;--mid:#5a6b85;--light:#8fa0b8;
+  --border:#e2e8f2;--hover:#eaf3fc;
+  --green:#0a8754;--green-bg:#e0f7ee;--amber:#b45309;--amber-bg:#fdf1dc;
+  --red:#c0392b;--red-bg:#fce8ea;--purple:#6d28d9;--purple-bg:#ede9fe;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;}
+.app{display:flex;height:100vh;}
+.sidebar{width:250px;background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:0;}
+.brand{padding:18px 20px;border-bottom:1px solid var(--nb);}
+.brow{display:flex;align-items:center;gap:10px;}
+.bmark{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--blue));border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:17px;flex-shrink:0;}
+.bname{font-size:14px;font-weight:700;color:#fff;}
+.bsub{font-size:10px;color:var(--light);margin-top:1px;}
+.nsec{padding:11px 12px 2px;}
+.nlbl{font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#4a5f7a;padding:0 8px 6px;}
+.ni{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:6px;cursor:pointer;color:#9aaec7;font-size:13px;margin-bottom:1px;transition:all 0.12s;}
+.ni:hover{background:var(--navy-h);color:#ccd8e8;}
+.ni.active{background:var(--navy-h);color:#fff;font-weight:600;}
+.ni .ic{width:16px;text-align:center;font-size:13px;flex-shrink:0;}
+.ni .lbl{flex:1;}
+.ni .ct{background:var(--accent);color:var(--navy);font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;}
+.tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;}
+.tag-new{background:#1b3d60;color:var(--accent);}
+.tag-soon{background:#2d1f52;color:#b794f6;}
+.sfooter{margin-top:auto;padding:13px 20px;border-top:1px solid var(--nb);display:flex;align-items:center;justify-content:space-between;}
+.sfooter .u{font-size:12px;color:#9aaec7;}
+.sfooter .gear{cursor:pointer;color:#6b7f9e;font-size:16px;}
+.sfooter .gear:hover{color:#fff;}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{background:var(--white);padding:11px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
+.sw{flex:1;position:relative;max-width:560px;}
+.sw .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--light);font-size:13px;}
+.sinput{width:100%;padding:8px 13px 8px 34px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;background:var(--bg);}
+.sinput:focus{border-color:var(--blue);background:#fff;}
+.tr{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.sync{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--light);}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.btnp{background:var(--navy);color:#fff;border:none;padding:7px 15px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.content{flex:1;overflow-y:auto;padding:22px 24px;}
+.pt{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.ps{font-size:13px;color:var(--mid);margin-bottom:20px;max-width:760px;line-height:1.55;}
+.sr{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.sc{background:var(--white);border-radius:10px;padding:14px 17px;flex:1;min-width:120px;border-left:3px solid var(--blue);}
+.sv{font-size:24px;font-weight:800;color:var(--navy);line-height:1;}
+.sl{font-size:11px;color:var(--mid);margin-top:5px;}
+.ss{font-size:11px;color:var(--light);margin-top:2px;}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.p-live{background:var(--green-bg);color:var(--green);}
+.p-wait{background:var(--amber-bg);color:var(--amber);}
+.p-soon{background:var(--purple-bg);color:var(--purple);}
+.p-pend{background:#e8f4fd;color:var(--blue);}
+.tc{background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead tr{background:var(--navy);}
+th{padding:10px 13px;text-align:left;color:#8fa0b8;font-weight:500;font-size:11px;}
+tbody tr{border-bottom:1px solid #eef2f8;cursor:pointer;transition:background 0.1s;}
+tbody tr:nth-child(even){background:#f8fafc;}
+tbody tr:hover{background:var(--hover)!important;}
+td{padding:10px 13px;vertical-align:middle;}
+td.cn{font-weight:600;color:var(--navy);}
+td.m{color:var(--mid);}
+.tf{padding:10px 16px;color:var(--light);font-size:12px;border-top:1px solid #eef2f8;}
+.tier{width:23px;height:23px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+.t0{background:#1a2744;}.tS{background:#2563b8;}.t1{background:#16b8a6;}.t2{background:#8fa0b8;}
+.stage{padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500;white-space:nowrap;}
+.sA{background:#e8f4fd;color:var(--blue);}.sSt{background:#eef2f7;color:var(--mid);}.sCl{background:var(--amber-bg);color:var(--amber);}
+.sts{padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;white-space:nowrap;}
+.si2{background:var(--green-bg);color:var(--green);}.sp{background:var(--amber-bg);color:var(--amber);}.sn{background:var(--red-bg);color:var(--red);}
+.frow{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.flbl{font-size:10px;color:var(--light);font-weight:700;text-transform:uppercase;}
+.fb{padding:6px 13px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;font-family:inherit;background:#eef2f8;color:var(--mid);}
+.fb.on{background:var(--navy);color:#fff;font-weight:600;}
+.fb.on.bl{background:var(--blue);}
+.hero{background:linear-gradient(130deg,var(--navy),#1e3055 60%,#162540);border-radius:14px;padding:30px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;right:-40px;top:-40px;width:300px;height:300px;background:radial-gradient(circle,rgba(22,184,166,0.18),transparent 65%);}
+.hlbl{font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--accent);text-transform:uppercase;}
+.htitle{font-size:25px;font-weight:800;margin:7px 0;line-height:1.2;}
+.hsub{font-size:13px;color:#b8cae0;max-width:580px;line-height:1.6;}
+.hmet{display:flex;gap:36px;margin-top:22px;position:relative;z-index:1;flex-wrap:wrap;}
+.hm-v{font-size:28px;font-weight:800;}
+.hm-l{font-size:11px;color:#8fa0b8;margin-top:1px;}
+.acc{color:var(--accent);}
+.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px;margin-bottom:20px;}
+.wc{background:var(--white);border-radius:11px;padding:16px;border:1px solid var(--border);transition:all 0.15s;cursor:pointer;}
+.wc:hover{border-color:var(--blue);box-shadow:0 3px 14px rgba(37,99,184,0.09);transform:translateY(-1px);}
+.wh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;}
+.wico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.wtitle{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.wdesc{font-size:12px;color:var(--mid);line-height:1.5;}
+.wfoot{margin-top:10px;font-size:11px;color:var(--light);}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:800px){.split{grid-template-columns:1fr;}}
+.lc{background:var(--white);border-radius:10px;padding:17px;border:1px solid var(--border);}
+.lct{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.lr{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #eef2f8;font-size:13px;}
+.lr:last-child{border-bottom:none;}
+.ck{color:var(--green);}.cw{color:var(--amber);}.cs{color:var(--purple);}
+.rh{text-align:center;padding:34px 20px 24px;}
+.rh h1{font-size:26px;font-weight:800;color:var(--navy);margin-bottom:7px;}
+.rh p{font-size:13px;color:var(--mid);max-width:520px;margin:0 auto;line-height:1.6;}
+.rbox{max-width:720px;margin:20px auto 0;}
+.riw{background:var(--white);border:2px solid var(--border);border-radius:13px;padding:15px 17px;display:flex;align-items:flex-start;gap:11px;transition:border 0.15s;}
+.riw:focus-within{border-color:var(--accent);}
+.rai{font-size:19px;color:var(--accent);margin-top:1px;}
+.rta{flex:1;border:none;outline:none;font-family:inherit;font-size:14px;resize:none;color:var(--text);min-height:24px;}
+.rsb{background:var(--navy);color:#fff;border:none;width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:15px;flex-shrink:0;}
+.rsb:disabled{opacity:0.5;cursor:not-allowed;}
+.sugg{max-width:720px;margin:18px auto 0;}
+.sl2{font-size:11px;color:var(--light);font-weight:700;margin-bottom:8px;text-transform:uppercase;}
+.si3{background:var(--white);border:1px solid var(--border);border-radius:9px;padding:12px 15px;margin-bottom:7px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:all 0.12s;}
+.si3:hover{border-color:var(--accent);background:#f5fdfb;}
+.si3 .plus{color:var(--accent);font-weight:700;font-size:15px;}
+.src-row{max-width:720px;margin:20px auto 0;display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
+.chip{display:flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--mid);font-weight:500;}
+.dot{width:6px;height:6px;border-radius:50%;}
+.dl{background:var(--green);}.dw{background:var(--amber);}.ds{background:var(--purple);}
+.sb{background:var(--purple-bg);border:1px solid #d8d0f5;border-radius:10px;padding:13px 17px;display:flex;align-items:center;gap:11px;margin-bottom:18px;}
+.sb-i{font-size:18px;}
+.sb-t{font-size:13px;font-weight:700;color:var(--purple);}
+.sb-s{font-size:12px;color:#5b21b6;margin-top:2px;line-height:1.5;}
+.wait-b{background:var(--amber-bg);border:1px solid #f0d090;border-radius:10px;padding:13px 17px;display:flex;align-items:center;gap:11px;margin-bottom:18px;}
+.wait-b .sb-t{color:var(--amber);}.wait-b .sb-s{color:#92400e;}
+.dnote{background:#f0f7ff;border:1px solid #c3d9f5;border-radius:8px;padding:10px 14px;font-size:12px;color:#1d4ed8;margin-bottom:18px;display:flex;gap:8px;line-height:1.5;}
+.fd{display:flex;align-items:center;flex-wrap:wrap;background:var(--white);border-radius:11px;padding:20px;border:1px solid var(--border);margin-bottom:14px;}
+.fs{flex:1;min-width:95px;text-align:center;padding:0 5px;}
+.fs .fi{width:40px;height:40px;border-radius:9px;background:#eef2f8;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 7px;transition:all 0.3s;}
+.fs.done .fi{background:var(--green-bg);}
+.fs.active .fi{background:var(--accent);color:#fff;animation:pulse 1s infinite;}
+.fs .ft{font-size:11px;font-weight:700;color:var(--navy);}
+.fs .fu{font-size:10px;color:var(--light);margin-top:2px;}
+.fa{color:var(--light);font-size:15px;padding:0 2px;align-self:center;margin-bottom:17px;}
+/* Live output area */
+.output{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:20px;margin-top:14px;min-height:60px;font-size:13px;line-height:1.65;color:var(--text);white-space:pre-wrap;}
+.output h3{font-size:15px;color:var(--navy);margin:14px 0 6px;font-weight:700;}
+.output strong{color:var(--navy);}
+.scan-line{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13px;color:var(--mid);opacity:0;animation:fadeUp 0.4s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.scan-check{color:var(--green);}
+.spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ta-input{width:100%;border:1px solid var(--border);border-radius:9px;padding:12px;font-family:inherit;font-size:13px;resize:vertical;min-height:90px;outline:none;}
+.ta-input:focus{border-color:var(--blue);}
+.btn-run{background:var(--accent);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;margin-top:10px;}
+.btn-run:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-run2{background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;margin-top:10px;}
+.inp{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;outline:none;}
+.inp:focus{border-color:var(--blue);}
+/* Modal */
+.modal-ov{position:fixed;inset:0;background:rgba(20,31,54,0.5);z-index:200;display:none;align-items:center;justify-content:center;}
+.modal-ov.open{display:flex;}
+.modal{background:#fff;border-radius:14px;padding:26px;width:440px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.modal h2{font-size:18px;color:var(--navy);margin-bottom:6px;}
+.modal p{font-size:13px;color:var(--mid);margin-bottom:16px;line-height:1.5;}
+.modal label{font-size:12px;font-weight:600;color:var(--navy);display:block;margin:12px 0 5px;}
+.modal .status-line{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eef2f8;font-size:12px;}
+.modal-btns{display:flex;gap:8px;margin-top:18px;}
+.mbtn{flex:1;padding:10px;border-radius:8px;border:none;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;}
+.mbtn.pr{background:var(--navy);color:#fff;}
+.mbtn.gh{background:#eef2f8;color:var(--text);}
+.dp{position:fixed;right:-390px;top:0;bottom:0;width:370px;background:#fff;box-shadow:-4px 0 22px rgba(0,0,0,0.13);z-index:100;padding:22px;overflow-y:auto;transition:right 0.2s;}
+.dp.open{right:0;}
+.ov2{position:fixed;inset:0;background:rgba(20,31,54,0.28);z-index:90;display:none;}
+.ov2.open{display:block;}
+.badge-pill{display:inline-flex;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar">
+  <div class="brand"><div class="brow"><div class="bmark">M</div><div><div class="bname">GIGF Intelligence</div><div class="bsub">Meridiam — Green Infrastructure</div></div></div></div>
+  <div class="nsec">
+    <div class="nlbl">Overview</div>
+    <div class="ni active" data-v="home"><span class="ic">⬒</span><span class="lbl">Home</span></div>
+    <div class="ni" data-v="research"><span class="ic">✦</span><span class="lbl">Research Hub</span><span class="tag tag-new">LIVE</span></div>
+  </div>
+  <div class="nsec">
+    <div class="nlbl">Automated Pipeline</div>
+    <div class="ni" data-v="intake"><span class="ic">✉</span><span class="lbl">Deal Intake to One-Pager</span><span class="tag tag-new">LIVE</span></div>
+    <div class="ni" data-v="pipeline"><span class="ic">▦</span><span class="lbl">Deal Pipeline</span><span class="ct">12</span></div>
+    <div class="ni" data-v="newdeals"><span class="ic">◎</span><span class="lbl">Deals of the Week</span></div>
+    <div class="ni" data-v="lbo"><span class="ic">⚡</span><span class="lbl">LBO / Buyout Analyzer</span><span class="tag tag-new">LIVE</span></div>
+  </div>
+  <div class="nsec">
+    <div class="nlbl">Intelligence</div>
+    <div class="ni" data-v="newsletter"><span class="ic">▧</span><span class="lbl">Newsletter</span><span class="tag tag-new">LIVE</span></div>
+    <div class="ni" data-v="memory"><span class="ic">◷</span><span class="lbl">Decision Memory</span></div>
+    <div class="ni" data-v="advisors"><span class="ic">◈</span><span class="lbl">Advisor Intelligence</span></div>
+    <div class="ni" data-v="synergy"><span class="ic">◇</span><span class="lbl">Portfolio Synergy</span><span class="tag tag-new">LIVE</span></div>
+    <div class="ni" data-v="coverage"><span class="ic">◫</span><span class="lbl">Coverage Gaps</span></div>
+  </div>
+  <div class="nsec">
+    <div class="nlbl">Operations</div>
+    <div class="ni" data-v="datahealth"><span class="ic">◱</span><span class="lbl">Salesforce Health</span></div>
+    <div class="ni" data-v="minutes"><span class="ic">▭</span><span class="lbl">Minutes and Actions</span></div>
+    <div class="ni" data-v="lp"><span class="ic">◰</span><span class="lbl">LP Reporting</span></div>
+    <div class="ni" data-v="digest"><span class="ic">☰</span><span class="lbl">Weekly Digest</span><span class="tag tag-new">LIVE</span></div>
+  </div>
+  <div class="nsec">
+    <div class="nlbl">System</div>
+    <div class="ni" data-v="status"><span class="ic">◲</span><span class="lbl">Access and Status</span></div>
+  </div>
+  <div class="sfooter"><div class="u">p.kumar@meridiam.com</div><div class="gear" onclick="openAdmin()">⚙</div></div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div class="sw"><span class="si">🔍</span><input class="sinput" id="si" placeholder="Search deals, companies, sectors, advisers..."></div>
+    <div class="tr"><div class="sync"><span class="sdot"></span><span id="connLabel">Connect API to activate</span></div><button class="btnp" onclick="openAdmin()">Admin</button></div>
+  </div>
+  <div class="content" id="C"></div>
+</div>
+</div>
+<div class="ov2" id="ov2"></div>
+<div class="dp" id="dp"></div>
+
+<!-- Admin Modal -->
+<div class="modal-ov" id="adminModal">
+  <div class="modal" id="adminInner"></div>
+</div>
+
+<script>
+// ---------- STATE ----------
+let API_KEY = "";
+let ADMIN_PW = "meridiam2026";
+let authed = false;
+let state={v:"home",q:"",tier:"all",stage:"all"};
+
+// ---------- DATA ----------
+const deals=[
+  {id:1,tier:"0",stage:"Active",company:"Weeecycling",country:"France",sector:"Strategic Metals Recycling",size:"N/D",lead:"Alexandre D.",adviser:"Oakley",nextStep:"LOI envoyée",status:"sp"},
+  {id:2,tier:"0",stage:"Active",company:"Sensinov (Pulse)",country:"France",sector:"Energy Optimisation",size:"N/D",lead:"Hortense T.",adviser:"N/D",nextStep:"Send NDA and receive IM",status:"sp"},
+  {id:3,tier:"S",stage:"Active",company:"CCm Technologies",country:"UK",sector:"Low-Carbon Fertiliser",size:"N/D",lead:"Hortense T.",adviser:"Lincoln",nextStep:"NDA and one-pager",status:"sp"},
+  {id:4,tier:"S",stage:"Active",company:"Stensborg",country:"Denmark",sector:"Nanoimprint Manufacturing",size:"N/D",lead:"Alexandre D.",adviser:"N/D",nextStep:"Management meeting",status:"si"},
+  {id:5,tier:"1",stage:"Active",company:"EDMI",country:"France",sector:"Electrical Engineering",size:"N/D",lead:"Hortense T.",adviser:"Alantra",nextStep:"NDA in execution",status:"si"},
+  {id:6,tier:"1",stage:"Active",company:"Zetra",country:"France",sector:"Heavy-Duty EV Charging",size:"N/D",lead:"Alexandre D.",adviser:"N/D",nextStep:"IC memo preparation",status:"sp"},
+  {id:7,tier:"1",stage:"Standby",company:"Fractal Energy",country:"France",sector:"VPP and HEMS",size:"N/D",lead:"Hortense T.",adviser:"N/D",nextStep:"Await Series B close",status:"sp"},
+  {id:8,tier:"1",stage:"Active",company:"Projet Casoar",country:"France",sector:"BESS Portfolio",size:"N/D",lead:"Alexandre D.",adviser:"Raymond James",nextStep:"Modelling update",status:"sn"},
+  {id:9,tier:"2",stage:"Classify",company:"Ineratec",country:"Germany",sector:"Sustainable Fuels",size:"N/D",lead:"TBC",adviser:"N/D",nextStep:"First call booked",status:"sn"},
+  {id:10,tier:"2",stage:"Classify",company:"Esforin",country:"Germany",sector:"Energy Trading Software",size:"N/D",lead:"TBC",adviser:"N/D",nextStep:"Deck review",status:"sn"},
+  {id:11,tier:"2",stage:"Standby",company:"Valoregen",country:"France",sector:"Plastic Recycling",size:"N/D",lead:"Hortense T.",adviser:"N/D",nextStep:"Monitor fundraise",status:"sn"},
+  {id:12,tier:"2",stage:"Standby",company:"Calysta",country:"US",sector:"Alternative Protein",size:"$55-60m",lead:"Hortense T.",adviser:"AquaSpark",nextStep:"Too early, monitor",status:"sn"},
+];
+const newDeals=[
+  {company:"Nexeon",country:"UK",description:"Silicon anode battery material",round:"Fundraising",amount:"EUR 1,167m",investors:"NWF, KDB, Honda Xcelerator",status:"sn"},
+  {company:"Recklinker",country:"UK",description:"Recycled clinker for steel recycling",round:"Series A",amount:"GBP 66m",investors:"Zero Carbon Capital",status:"sn"},
+  {company:"Ki 13",country:"UK",description:"Biomass electrolysis for green hydrogen",round:"Seed",amount:"EUR 50m",investors:"HICO, Burgest, Triple Impact",status:"sn"},
+  {company:"Viraj Aero",country:"France",description:"Propulsion system for aviation",round:"Seed",amount:"EUR 27m",investors:"Irdi, Climate Founders",status:"sn"},
+  {company:"GCK",country:"France",description:"Sustainable energy and e-mobility",round:"Buyout",amount:"N/D",investors:"Aminvest",status:"sn"},
+];
+const advisors=[
+  {name:"Oakley Advisory",deals:14,sweetPct:43,avgSize:"€18m",sectors:"Energy, Waste",status:"Top performer"},
+  {name:"Lincoln International",deals:11,sweetPct:36,avgSize:"€24m",sectors:"Infrastructure, Industrials",status:"Active"},
+  {name:"Alantra",deals:9,sweetPct:22,avgSize:"€15m",sectors:"Climate Tech, Recycling",status:"Active"},
+  {name:"Raymond James",deals:7,sweetPct:14,avgSize:"€31m",sectors:"Energy Transition",status:"Review"},
+  {name:"BNP Paribas",deals:5,sweetPct:40,avgSize:"€42m",sectors:"Renewables, Infrastructure",status:"Top performer"},
+];
+const memories=[
+  {company:"Materr'up",date:"Mar 2023",reviewer:"Hortense T.",decision:"Pass",reason:"Too early stage. No commercial revenues. Re-engage at Series B."},
+  {company:"Chainergy",date:"Aug 2026",reviewer:"Alexandre D.",decision:"Pass",reason:"Too early. 100 MW pipeline unvalidated. Recommend monitoring."},
+  {company:"Urban Glide",date:"Sep 2026",reviewer:"Hortense T.",decision:"Decline",reason:"Decreasing top line. Revenue trajectory negative."},
+  {company:"Blue (Water SME)",date:"Sep 2026",reviewer:"Hortense T.",decision:"Decline",reason:"MBI on small company. Not aligned with GIGF ticket size."},
+];
+const stMap={si:{l:"Sweet spot",c:"si2"},sp:{l:"Sweet spot TBC",c:"sp"},sn:{l:"Not sweet spot",c:"sn"}};
+const SAMPLE_TEASER="Confidential — Project Helios\n\nWe are pleased to introduce a French developer of biogas projects converting organic waste into renewable energy and biofertilisers. Founded 2018, 42 employees, headquartered in Lyon.\n\n2025 revenue: EUR 14m. 2025 EBITDA: EUR 2.1m. Four operational sites, two under construction. Long-term offtake contracts with two regional utilities.\n\nThe company is raising EUR 25m in growth equity to fund three additional sites. Advised by Oakley Advisory. Management retaining majority. Targeting close by Q1 2027.";
+
+// ---------- HELPERS ----------
+const tb=t=>`<span class="tier t${t}">${t}</span>`;
+const stgb=s=>{const m={Active:"sA",Standby:"sSt",Classify:"sCl"};const l=s==="Classify"?"To Classify":s;return `<span class="stage ${m[s]||"sSt"}">${l}</span>`;};
+const stsb=s=>{const m=stMap[s]||stMap.sn;return `<span class="sts ${m.c}">${m.l}</span>`;};
+const bar=n=>`<span style="display:inline-block;height:6px;border-radius:3px;background:var(--accent);width:${n*1.8}px;vertical-align:middle;margin-left:6px"></span>`;
+
+// ---------- CLAUDE API ----------
+async function callClaude(prompt, sys){
+  if(!API_KEY){ throw new Error("no-key"); }
+  const res = await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":API_KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1400,system:sys||"You are a precise M&A analyst at Meridiam GIGF, a sustainable infrastructure investor. Be factual, concise, use no marketing language.",messages:[{role:"user",content:prompt}]})
+  });
+  if(!res.ok){ const e=await res.text(); throw new Error(e); }
+  const data=await res.json();
+  return data.content.filter(x=>x.type==="text").map(x=>x.text).join("\n");
+}
+function fmtOutput(t){
+  return t.replace(/^### (.*)$/gm,'<h3>$1</h3>').replace(/^## (.*)$/gm,'<h3>$1</h3>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^- /gm,'• ');
+}
+
+// ---------- SCAN ANIMATION ----------
+async function runScan(el, sources){
+  el.innerHTML="";
+  for(let i=0;i<sources.length;i++){
+    const line=document.createElement("div");
+    line.className="scan-line";
+    line.style.animationDelay=(i*0.15)+"s";
+    line.innerHTML=`<span class="spinner"></span><span>Scanning ${sources[i]}...</span>`;
+    el.appendChild(line);
+    await new Promise(r=>setTimeout(r,260));
+    line.innerHTML=`<span class="scan-check">✓</span><span style="color:var(--text)">${sources[i]}</span>`;
+  }
+  await new Promise(r=>setTimeout(r,200));
+}
+
+// ---------- PAGES ----------
+function renderHome(){
+  const wfs=[
+    {ic:"✉",bg:"#e0f7ee",v:"intake",title:"Deal Intake to One-Pager",desc:"Paste a teaser and watch the full pipeline run: extract, screen, enrich, draft one-pager, propose Salesforce update.",s:"live"},
+    {ic:"✦",bg:"#f3ebfd",v:"research",title:"Research Hub",desc:"Ask any research question across the full intelligence stack. Live answers with source reasoning.",s:"live"},
+    {ic:"⚡",bg:"#fdf1dc",v:"lbo",title:"LBO / Buyout Analyzer",desc:"Enter a company and get a live LBO versus growth-buyout assessment with full reasoning.",s:"live"},
+    {ic:"▧",bg:"#eef2f8",v:"newsletter",title:"Newsletter Automation",desc:"Pipeline, calendar and market news assembled into the house newsletter, generated live.",s:"live"},
+    {ic:"◇",bg:"#fce8ea",v:"synergy",title:"Portfolio Synergy",desc:"Checks whether a new company could partner with, supply, or be acquired by portfolio companies.",s:"live"},
+    {ic:"◱",bg:"#e8f4fd",v:"datahealth",title:"Salesforce Health",desc:"Daily quality checks across every open opportunity. Missing fields, stale records, duplicates.",s:"live"},
+    {ic:"◷",bg:"#e0f7ee",v:"memory",title:"Decision Memory",desc:"Every reviewed company stored with decision and reasoning. Surfaces instantly on reappearance.",s:"live"},
+    {ic:"◈",bg:"#fdf1dc",v:"advisors",title:"Advisor Intelligence",desc:"Ranks advisers by conversion rate, deal quality and sector strength. Shows who to prioritise.",s:"live"},
+    {ic:"☰",bg:"#ede9fe",v:"digest",title:"Weekly Digest",desc:"The most important changes this week: advanced, stalled, new, and overdue actions.",s:"live"},
+  ];
+  const pl=s=>`<span class="pill p-live">Live</span>`;
+  return `
+<div class="hero"><div class="hlbl">Meridiam GIGF — Deal Intelligence Platform</div><div class="htitle">Everything the team needs,<br>automated end to end.</div><div class="hsub">Live pipeline, instant deal one-pagers, cross-database research, buyout analysis, advisor intelligence and decision memory. One platform, with a human approval gate before anything is saved or sent.</div>
+<div class="hmet"><div><div class="hm-v">${deals.length}</div><div class="hm-l">Live opportunities</div></div><div><div class="hm-v">${newDeals.length}</div><div class="hm-l">New deals this week</div></div><div><div class="hm-v acc">15</div><div class="hm-l">Workflows</div></div><div><div class="hm-v acc">16</div><div class="hm-l">Data sources</div></div></div></div>
+<div class="dnote">ℹ Interactive prototype. Workflows marked Live run real analysis. Click the Admin button to connect the engine, then try Deal Intake, Research, or the LBO Analyzer.</div>
+<div class="pt">Workflows</div><div class="ps">Click any workflow to run it.</div>
+<div class="wg">${wfs.map(w=>`<div class="wc" onclick="go('${w.v}')"><div class="wh"><div class="wico" style="background:${w.bg}">${w.ic}</div>${pl(w.s)}</div><div class="wtitle">${w.title}</div><div class="wdesc">${w.desc}</div><div class="wfoot">Open workflow</div></div>`).join("")}</div>
+<div class="pt">Connected data sources</div><div class="ps">All the intelligence Meridiam subscribes to, unified into one layer.</div>
+<div class="src-row" style="justify-content:flex-start;margin:0 0 8px">${[["Salesforce","l"],["SharePoint","l"],["Microsoft 365","l"],["FT Climate","l"],["CF News","l"],["Les Echos","l"],["Private Equity News","l"],["Green Universe","l"],["Goldman Sachs","l"],["AlphaSense","w"],["PitchBook","w"],["Capital IQ","w"],["Grata","w"],["Pappers","w"],["Diane","w"],["Crunchbase","s"]].map(([n,s])=>`<span class="chip"><span class="dot d${s}"></span>${n}</span>`).join("")}</div>`;
+}
+
+function renderResearch(){
+  const sugg=["Find European SMEs building low-carbon cement with revenues under €30m","Screen French battery recycling companies with a potential founder-exit opportunity","Build a comparable set for a strategic metals recycling company in Europe","Summarise recent EU regulatory developments affecting grid infrastructure"];
+  return `<div class="rh"><h1>What would you like to research?</h1><p>Ask any research question across Meridiam's full intelligence stack. Screen markets, build comparable sets, and prepare research, powered by all sources at once.</p></div>
+<div class="rbox"><div class="riw"><span class="rai">✦</span><textarea class="rta" id="rta" placeholder="e.g. Find European companies developing energy management systems for commercial and industrial clients, revenues €5m to €50m, and rank by fit..." rows="2"></textarea><button class="rsb" id="rsb" onclick="doResearch()">↑</button></div></div>
+<div class="sugg"><div class="sl2">Suggested research</div>${sugg.map(s=>`<div class="si3" onclick="document.getElementById('rta').value=this.innerText.replace('+','').trim();document.getElementById('rta').focus();"><span class="plus">+</span><span>${s}</span></div>`).join("")}</div>
+<div class="src-row">${[["AlphaSense","w"],["PitchBook","w"],["Capital IQ","w"],["Grata","w"],["Pappers","w"],["Web and News","l"]].map(([n,s])=>`<span class="chip"><span class="dot d${s}"></span>${n}</span>`).join("")}</div>
+<div id="researchOut"></div>`;
+}
+async function doResearch(){
+  const q=document.getElementById("rta").value.trim();
+  if(!q) return;
+  if(!ensureKey()) return;
+  const out=document.getElementById("researchOut");
+  out.innerHTML=`<div class="output" id="ro"></div>`;
+  const ro=document.getElementById("ro");
+  await runScan(ro,["Grata company data","PitchBook financials","AlphaSense filings","Pappers registry","Recent news"]);
+  ro.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Analysing across sources...</div>`;
+  try{
+    const r=await callClaude(`As a Meridiam GIGF analyst, research this request and return a structured answer with specific example companies, key data points, and a short recommendation. Request: ${q}`,"You are a precise M&A research analyst at Meridiam GIGF. Return concise, structured findings. Use headers and bullet points. No marketing language. Present example companies with plausible detail, and note where live data access would refine results.");
+    ro.innerHTML=fmtOutput(r)+`<div style="margin-top:14px;font-size:11px;color:var(--light)">Sources: Grata, PitchBook, AlphaSense, Pappers, web. Connect live APIs for verified figures.</div>`;
+  }catch(e){ ro.innerHTML=errMsg(e); }
+}
+
+function renderIntake(){
+  return `<div class="pt">Deal Intake to One-Pager</div><div class="ps">The complete automated pipeline. A teaser arrives, and the system extracts every field, checks decision memory, screens against the five GIGF criteria, enriches from all sources, drafts a one-pager, and proposes a Salesforce update. Nothing saves until approved.</div>
+<div class="fd" id="flow">
+  ${["Teaser|Email in","Extract|Fields","Memory|Prior check","Screen|5 criteria","Enrich|All sources","One-Pager|Draft","Salesforce|Propose"].map((s,i)=>{const[t,u]=s.split("|");return `<div class="fs" id="fs${i}"><div class="fi">${["✉","◱","◷","✓","◈","▤","☁"][i]}</div><div class="ft">${t}</div><div class="fu">${u}</div></div>${i<6?'<div class="fa">→</div>':''}`;}).join("")}
+</div>
+<div class="lc"><div class="lct">Incoming teaser</div>
+<textarea class="ta-input" id="teaserIn">${SAMPLE_TEASER}</textarea>
+<button class="btn-run" id="runIntake" onclick="runIntake()">Run full pipeline</button>
+</div>
+<div id="intakeOut"></div>`;
+}
+async function runIntake(){
+  if(!ensureKey()) return;
+  const teaser=document.getElementById("teaserIn").value.trim();
+  if(!teaser) return;
+  const btn=document.getElementById("runIntake"); btn.disabled=true; btn.textContent="Running...";
+  const out=document.getElementById("intakeOut");
+  out.innerHTML=`<div class="output" id="io"></div>`;
+  const io=document.getElementById("io");
+  const steps=[0,1,2,3,4,5,6];
+  for(const s of steps){ document.getElementById("fs"+s).classList.add("active"); await new Promise(r=>setTimeout(r,400)); document.getElementById("fs"+s).classList.remove("active"); document.getElementById("fs"+s).classList.add("done"); }
+  io.innerHTML=`<div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Generating structured one-pager and Salesforce proposal...</div>`;
+  try{
+    const r=await callClaude(`You are the GIGF deal intake engine. Process this teaser and return, in order:\n\n1. EXTRACTED FIELDS (company, sector, geography, revenue, EBITDA, employees, adviser, amount sought, use of proceeds)\n2. DECISION MEMORY CHECK (state whether this looks like a new company or a possible prior review, and why)\n3. FIVE-CRITERIA SCREEN (Sustainability impact / Market / Business model / Management / GIGF ticket fit — for each give a one-line evidence-based assessment)\n4. ONE-PAGER (with sections: Company Overview, Business, Financials, Fundraising, Reco). In Reco give specific next-step questions only, no opinions.\n5. SALESFORCE UPDATE PROPOSED (list the exact fields to create on the Opportunity as a diff)\n\nTeaser:\n${teaser}`,"You are the Meridiam GIGF automated intake engine. Be factual and structured. No marketing adjectives. Follow the exact output order requested.");
+    io.innerHTML=fmtOutput(r)+`<div style="margin-top:16px;display:flex;gap:8px"><button class="btn-run" onclick="alert('Approved. In production this writes to Salesforce, creates the SharePoint folder, and adds to the newsletter appendix.')">Approve and write to Salesforce</button><button class="btn-run2" onclick="alert('Sent back to analyst for edits.')">Request changes</button></div>`;
+  }catch(e){ io.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Run full pipeline";
+}
+
+function renderLBO(){
+  return `<div class="pt">LBO / Buyout Analyzer</div><div class="ps">Enter a company and its key metrics. The engine reasons through whether it fits a leveraged buyout or a growth-buyout profile, assessing holding period, cash flow stability, leverage capacity, and founder situation.</div>
+<div class="lc"><div class="lct">Company details</div>
+<input class="inp" id="lboName" placeholder="Company name, e.g. Project Eole" style="margin-bottom:8px"><input class="inp" id="lboDetails" placeholder="Key metrics, e.g. €20m revenue, €3.5m EBITDA, wind turbine dismantling, founder-owned, 15 years old">
+<button class="btn-run" id="runLbo" onclick="runLBO()">Run buyout analysis</button></div>
+<div id="lboOut"></div>`;
+}
+async function runLBO(){
+  if(!ensureKey()) return;
+  const name=document.getElementById("lboName").value.trim();
+  const det=document.getElementById("lboDetails").value.trim();
+  if(!name) return;
+  const btn=document.getElementById("runLbo"); btn.disabled=true; btn.textContent="Analysing...";
+  const out=document.getElementById("lboOut"); out.innerHTML=`<div class="output" id="lo"></div>`;
+  const lo=document.getElementById("lo");
+  await runScan(lo,["Company financials","Holding period data","Comparable transactions","Debt capacity model"]);
+  lo.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Reasoning through buyout structure...</div>`;
+  try{
+    const r=await callClaude(`Analyse this company for Meridiam GIGF as a potential buyout. Company: ${name}. Details: ${det||"limited information provided"}.\n\nReturn:\n### Verdict\nOne line: LBO candidate / Growth buyout candidate / Neither, and why.\n### LBO assessment\nCash flow stability, EBITDA margin, leverage capacity, debt serviceability.\n### Growth buyout assessment\nRevenue growth trajectory, reinvestment need, scalability.\n### Founder and ownership signals\nFounder situation, hold period, succession.\n### Key risks\n2-3 specific risks.\n### Recommended next steps\nSpecific questions to ask, no opinions.`,"You are a Meridiam GIGF investment analyst specialising in infrastructure buyouts. Reason rigorously. Distinguish clearly between leveraged buyout logic (stable cash flows, debt capacity) and growth buyout logic (revenue expansion). Be factual.");
+    lo.innerHTML=fmtOutput(r);
+  }catch(e){ lo.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Run buyout analysis";
+}
+
+function renderNewsletter(){
+  return `<div class="pt">Newsletter Automation</div><div class="ps">Every Monday at 08:00. Salesforce pipeline pulled, team calendar scanned, market news gathered, formatted to the GIGF house template, and published to SharePoint with a Teams notification. Rodolphe reviews and publishes.</div>
+<div class="lc"><div class="lct">Generate this week's draft</div><div style="font-size:13px;color:var(--mid);margin-bottom:4px">Week of September 14th 2026. The engine will assemble the pipeline table, events, and a macro news section.</div>
+<button class="btn-run" id="runNl" onclick="runNewsletter()">Generate newsletter draft</button></div>
+<div id="nlOut"></div>`;
+}
+async function runNewsletter(){
+  if(!ensureKey()) return;
+  const btn=document.getElementById("runNl"); btn.disabled=true; btn.textContent="Generating...";
+  const out=document.getElementById("nlOut"); out.innerHTML=`<div class="output" id="no"></div>`;
+  const no=document.getElementById("no");
+  await runScan(no,["Salesforce pipeline report","Team calendars","FT Climate and Les Echos","Deal flow updates"]);
+  no.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Drafting newsletter...</div>`;
+  const pipeline=deals.map(d=>`${d.company} (${d.country}, ${d.sector}, tier ${d.tier}, ${d.nextStep})`).join("; ");
+  try{
+    const r=await callClaude(`Generate the GIGF weekly newsletter for the week of September 14th 2026. Use these live pipeline items: ${pipeline}.\n\nStructure:\n### Deals of the Week\nA short intro line then 3 notable new market deals (invent plausible ones in green infrastructure).\n### Agenda Dealflow Review\nSummarise the pipeline above grouped by tier, one line each, factual.\n### Other\nList: IPEM in Paris Tuesday, Meridiam Afterwork Drinks Thursday.\n### Market Intelligence\nOne short macro EU story relevant to green infrastructure, factual, 2-3 sentences.\nEnd with: Have a good week!\n\nNo marketing language. Preserve any French next-step text as given.`,"You are the Meridiam GIGF newsletter engine. Factual, concise, house style. No adjectives like 'exciting' or 'strong'.");
+    no.innerHTML=fmtOutput(r)+`<div style="margin-top:14px;display:flex;gap:8px"><button class="btn-run" onclick="alert('In production, this publishes an unpublished SharePoint draft and posts the link to Teams for Rodolphe to review.')">Save draft to SharePoint</button></div>`;
+  }catch(e){ no.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Generate newsletter draft";
+}
+
+function renderSynergy(){
+  return `<div class="pt">Portfolio Synergy Detection</div><div class="ps">When a new company appears, the engine checks whether it could serve as a commercial partner, supplier, technology integrator, or acquisition target for an existing GIGF portfolio company. This flags relevance, it does not recommend.</div>
+<div class="lc"><div class="lct">Check a company against the portfolio</div>
+<input class="inp" id="synName" placeholder="Company name" style="margin-bottom:8px"><input class="inp" id="synDesc" placeholder="What they do, e.g. EV depot charging software with load balancing">
+<div style="font-size:12px;color:var(--light);margin-top:8px">Portfolio reference: iwell (battery storage), Chargepoly (heavy-duty EV charging), plus GIGF thesis sectors.</div>
+<button class="btn-run" id="runSyn" onclick="runSynergy()">Check synergy</button></div>
+<div id="synOut"></div>`;
+}
+async function runSynergy(){
+  if(!ensureKey()) return;
+  const name=document.getElementById("synName").value.trim();
+  const desc=document.getElementById("synDesc").value.trim();
+  if(!name) return;
+  const btn=document.getElementById("runSyn"); btn.disabled=true; btn.textContent="Checking...";
+  const out=document.getElementById("synOut"); out.innerHTML=`<div class="output" id="so"></div>`;
+  const so=document.getElementById("so");
+  await runScan(so,["Portfolio company profiles","Commercial overlap","Supply chain fit"]);
+  so.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Assessing portfolio relevance...</div>`;
+  try{
+    const r=await callClaude(`Assess whether ${name} (${desc||"green infrastructure company"}) has any synergy with Meridiam GIGF portfolio companies: iwell (behind-the-meter battery storage and energy management), Chargepoly (heavy-duty EV charging). Also consider GIGF thesis sectors: energy transition, sustainable transport, digital and social infrastructure, environment.\n\nReturn:\n### Relevance\nOne line: relevant / not relevant, and to which portfolio company.\n### Synergy type\nCommercial partnership, supplier, technology integration, geographic expansion, or acquisition target, with a specific reason.\n### For the deal team\nOne concrete follow-up to evaluate.\n\nThis is a flag for the team, not a recommendation.`,"You are the Meridiam GIGF portfolio synergy engine. Be specific and factual. If there is no meaningful synergy, say so plainly.");
+    so.innerHTML=fmtOutput(r);
+  }catch(e){ so.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Check synergy";
+}
+
+function renderDigest(){
+  return `<div class="pt">Weekly Digest</div><div class="ps">The most important changes across the pipeline this week: deals advanced, deals stalled, new opportunities, and overdue actions. Turns the newsletter into a management tool.</div>
+<div class="lc"><div class="lct">Generate this week's digest</div><button class="btn-run" id="runDig" onclick="runDigest()">Generate digest</button></div>
+<div id="digOut"></div>`;
+}
+async function runDigest(){
+  if(!ensureKey()) return;
+  const btn=document.getElementById("runDig"); btn.disabled=true; btn.textContent="Generating...";
+  const out=document.getElementById("digOut"); out.innerHTML=`<div class="output" id="do"></div>`;
+  const dobj=document.getElementById("do");
+  await runScan(dobj,["Pipeline changes","Stage movements","Overdue actions"]);
+  const pipeline=deals.map(d=>`${d.company} (tier ${d.tier}, ${d.stage}, ${d.nextStep})`).join("; ");
+  try{
+    const r=await callClaude(`Generate a management digest for the GIGF pipeline this week. Pipeline: ${pipeline}.\n\nReturn:\n### Deals advanced\n2-3 items that moved forward.\n### Deals stalled\n1-2 items needing attention.\n### New this week\nNote 2-3 new market deals.\n### Actions overdue\n1-2 flagged follow-ups.\n### One thing to watch\nA single management-level observation.\n\nFactual, concise, no adjectives.`,"You are the Meridiam GIGF management digest engine. Executive tone, factual, brief.");
+    dobj.innerHTML=fmtOutput(r);
+  }catch(e){ dobj.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Generate digest";
+}
+
+function renderPipeline(){
+  const f=deals.filter(d=>{const q=state.q.toLowerCase();const m=d.company.toLowerCase().includes(q)||d.country.toLowerCase().includes(q)||d.sector.toLowerCase().includes(q)||d.lead.toLowerCase().includes(q);return m&&(state.tier==="all"||d.tier===state.tier)&&(state.stage==="all"||d.stage===state.stage);});
+  return `<div class="pt">Deal Pipeline</div><div class="ps">Live GIGF dealflow, grouped by tier and stage. Click any row for details.</div>
+<div class="sr"><div class="sc" style="border-color:#1a2744"><div class="sv">${deals.length}</div><div class="sl">Total pipeline</div></div><div class="sc" style="border-color:#2563b8"><div class="sv">${deals.filter(d=>d.tier==="0"||d.tier==="S").length}</div><div class="sl">Tier 0 and S</div></div><div class="sc" style="border-color:var(--green)"><div class="sv">${deals.filter(d=>d.status==="si").length}</div><div class="sl">Sweet spot</div></div><div class="sc" style="border-color:var(--accent)"><div class="sv">${deals.filter(d=>d.stage==="Active").length}</div><div class="sl">Active</div></div></div>
+<div class="frow"><span class="flbl">Tier</span><div style="display:flex;gap:6px">${["all","0","S","1","2"].map(t=>`<button class="fb ${state.tier===t?"on":""}" onclick="setT('${t}')">${t==="all"?"All":t}</button>`).join("")}</div><span class="flbl" style="margin-left:8px">Stage</span><div style="display:flex;gap:6px">${["all","Active","Standby","Classify"].map(s=>`<button class="fb bl ${state.stage===s?"on":""}" onclick="setSt('${s}')">${s==="all"?"All":s==="Classify"?"To Classify":s}</button>`).join("")}</div></div>
+<div class="tc"><table><thead><tr><th>Tier</th><th>Stage</th><th>Company</th><th>Country</th><th>Sector</th><th>Lead</th><th>Next step</th><th>Status</th></tr></thead><tbody>${f.map(d=>`<tr onclick="openD(${d.id})"><td>${tb(d.tier)}</td><td>${stgb(d.stage)}</td><td class="cn">${d.company}</td><td class="m">${d.country}</td><td class="m">${d.sector}</td><td class="m">${d.lead}</td><td>${d.nextStep}</td><td>${stsb(d.status)}</td></tr>`).join("")}</tbody></table><div class="tf">${f.length} of ${deals.length} opportunities</div></div>`;
+}
+function renderNewDeals(){return `<div class="pt">Deals of the Week</div><div class="ps">New fundraising and M&A this week. Not yet in pipeline. Under €2m excluded.</div><div class="tc"><table><thead><tr><th>Company</th><th>Country</th><th>Description</th><th>Round</th><th>Amount</th><th>Investors</th><th>Status</th></tr></thead><tbody>${newDeals.map(d=>`<tr><td class="cn">${d.company}</td><td class="m">${d.country}</td><td>${d.description}</td><td class="m">${d.round}</td><td style="font-weight:600">${d.amount}</td><td class="m" style="font-size:12px">${d.investors}</td><td>${stsb(d.status)}</td></tr>`).join("")}</tbody></table><div class="tf">${newDeals.length} new deals</div></div>`;}
+function renderMemory(){return `<div class="pt">Decision Memory</div><div class="ps">Every reviewed company stored with date, reviewer, decision and reasoning. Search a name to retrieve prior decisions instantly.</div>
+<div class="lc" style="margin-bottom:14px"><div class="lct">Check a company</div><input class="inp" id="memName" placeholder="Company name, e.g. Materr'up" style="margin-bottom:8px"><button class="btn-run" id="runMem" onclick="runMem()">Search memory</button><div id="memOut"></div></div>
+<div class="sr"><div class="sc" style="border-color:var(--navy)"><div class="sv">47</div><div class="sl">Companies in memory</div></div><div class="sc" style="border-color:var(--red)"><div class="sv">31</div><div class="sl">Declined</div></div><div class="sc" style="border-color:var(--amber)"><div class="sv">12</div><div class="sl">Pass, monitor</div></div><div class="sc" style="border-color:var(--green)"><div class="sv">4</div><div class="sl">Active pipeline</div></div></div>
+<div class="tc"><table><thead><tr><th>Company</th><th>Date</th><th>Reviewer</th><th>Decision</th><th>Reason</th></tr></thead><tbody>${memories.map(m=>`<tr><td class="cn">${m.company}</td><td class="m">${m.date}</td><td class="m">${m.reviewer}</td><td><span class="pill ${m.decision==="Pass"?"p-wait":"p-soon"}">${m.decision}</span></td><td style="font-size:12px;color:var(--mid)">${m.reason}</td></tr>`).join("")}</tbody></table><div class="tf">4 of 47 decisions</div></div>`;}
+async function runMem(){
+  if(!ensureKey()) return;
+  const name=document.getElementById("memName").value.trim(); if(!name) return;
+  const out=document.getElementById("memOut"); out.innerHTML=`<div class="output" id="mo"><div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Searching decision memory...</div></div>`;
+  const mo=document.getElementById("mo");
+  const known=memories.map(m=>`${m.company}: ${m.decision} (${m.date}, ${m.reviewer}) — ${m.reason}`).join("\n");
+  try{
+    const r=await callClaude(`Search GIGF decision memory for "${name}". Known records:\n${known}\n\nIf there is a match, return the prior decision, date, reviewer, reasoning, and whether anything has likely changed since. If no match, state that this appears to be a new company with no prior GIGF review, and suggest what to capture.`,"You are the GIGF decision memory engine. Factual and brief.");
+    mo.innerHTML=fmtOutput(r);
+  }catch(e){ mo.innerHTML=errMsg(e); }
+}
+function renderAdvisors(){return `<div class="pt">Advisor Intelligence</div><div class="ps">Built from deal history. Which advisers send the best opportunities, which sectors they cover, and who has gone quiet.</div><div class="sr"><div class="sc" style="border-color:var(--navy)"><div class="sv">23</div><div class="sl">Active advisers</div></div><div class="sc" style="border-color:var(--green)"><div class="sv">43%</div><div class="sl">Best conversion</div></div><div class="sc" style="border-color:var(--amber)"><div class="sv">4</div><div class="sl">Inactive 90 days</div></div></div><div class="tc"><table><thead><tr><th>Adviser</th><th>Deals sent</th><th>Sweet-spot rate</th><th>Avg size</th><th>Sectors</th><th>Status</th></tr></thead><tbody>${advisors.map(a=>`<tr><td class="cn">${a.name}</td><td>${a.deals}${bar(a.deals)}</td><td style="font-weight:600;color:${a.sweetPct>30?'var(--green)':a.sweetPct>15?'var(--amber)':'var(--red)'}">${a.sweetPct}%</td><td>${a.avgSize}</td><td class="m" style="font-size:12px">${a.sectors}</td><td><span class="pill ${a.status==="Top performer"?"p-live":a.status==="Active"?"p-pend":"p-wait"}">${a.status}</span></td></tr>`).join("")}</tbody></table><div class="tf">Ranked by conversion rate</div></div>`;}
+function renderCoverage(){
+  const sectors=[["Energy Transition",34],["Recycling and Waste",22],["Sustainable Transport",18],["Water and Environment",9],["Digital Infrastructure",6],["Social Infrastructure",3]];
+  const max=34;
+  return `<div class="pt">Coverage Gap Analysis</div><div class="ps">Which sectors and geographies generate most and least dealflow. A management view of where sourcing is strong and where it is thin.</div>
+<div class="split"><div class="lc"><div class="lct">Dealflow by sector (last 12 months)</div>${sectors.map(([s,n])=>`<div style="margin:9px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${s}</span><span style="color:var(--mid)">${n}</span></div><div style="height:7px;background:#eef2f8;border-radius:4px"><div style="height:7px;border-radius:4px;background:var(--accent);width:${n/max*100}%"></div></div></div>`).join("")}</div>
+<div class="lc"><div class="lct">Observations</div><div class="lr"><span class="ck">✓</span>Energy transition and recycling are well covered</div><div class="lr"><span class="cw">◐</span>Digital infrastructure under-covered versus thesis weight</div><div class="lr"><span class="cw">◐</span>Social infrastructure dealflow very thin</div><div class="lr"><span class="cw">◐</span>Germany and Nordics under-represented versus France</div><div class="lr"><span class="cs">◇</span>4 advisers inactive over 90 days, worth re-engaging</div></div></div>`;
+}
+function renderDataHealth(){
+  const checks=[["Missing opportunity fields",3,"amber"],["Stale opportunities over 90 days",2,"amber"],["Missing adviser or intermediary",5,"amber"],["Missing next step",4,"red"],["Duplicate company records",1,"red"],["Duplicate adviser records",0,"green"],["Broken SharePoint links",2,"amber"],["Missing investment memo",3,"amber"],["Missing deal folder",2,"red"],["Missing screening outcome",6,"red"]];
+  const col={amber:"var(--amber)",red:"var(--red)",green:"var(--green)"};
+  return `<div class="pt">Salesforce Data Quality</div><div class="ps">Daily checks across all open opportunities. Clean data is the foundation every other workflow depends on.</div>
+<div class="sr"><div class="sc" style="border-color:var(--red)"><div class="sv">${checks.filter(c=>c[2]==="red").reduce((a,c)=>a+c[1],0)}</div><div class="sl">Critical</div></div><div class="sc" style="border-color:var(--amber)"><div class="sv">${checks.filter(c=>c[2]==="amber").reduce((a,c)=>a+c[1],0)}</div><div class="sl">Warnings</div></div><div class="sc" style="border-color:var(--green)"><div class="sv">${deals.length-8}</div><div class="sl">Clean records</div></div></div>
+<div class="tc"><table><thead><tr><th>Check</th><th>Issues</th><th>Severity</th></tr></thead><tbody>${checks.map(c=>`<tr><td>${c[0]}</td><td style="font-weight:700;color:${col[c[2]]}">${c[1]}</td><td><span class="pill" style="background:${c[2]==="green"?'var(--green-bg)':c[2]==="red"?'var(--red-bg)':'var(--amber-bg)'};color:${col[c[2]]}">${c[2]==="green"?"Clear":c[2]==="red"?"Critical":"Warning"}</span></td></tr>`).join("")}</tbody></table><div class="tf">Last run today 07:00</div></div>`;
+}
+function renderMinutes(){
+  return `<div class="pt">Minutes and Action Tracker</div><div class="ps">Paste a meeting transcript. The engine structures it into themed minutes and extracts owner, action and deadline items.</div>
+<div class="lc"><div class="lct">Meeting transcript</div><textarea class="ta-input" id="minIn" placeholder="Paste transcript or notes here...">GIGF weekly, Sep 8. Alexandre to contact Oakley re Weeecycling and request the updated IM by Friday. Hortense will send the NDA to CCm Technologies tomorrow. Pawan to finish the Salesforce MCP activation this week. Rodolphe flagged the newsletter needs the events section updated before Monday. Team agreed to decline Urban Glide given the declining top line. Zetra looks close to Chargepoly, Alexandre to check for overlap.</textarea>
+<button class="btn-run" id="runMin" onclick="runMinutes()">Structure minutes and actions</button></div>
+<div id="minOut"></div>`;
+}
+async function runMinutes(){
+  if(!ensureKey()) return;
+  const t=document.getElementById("minIn").value.trim(); if(!t) return;
+  const btn=document.getElementById("runMin"); btn.disabled=true; btn.textContent="Processing...";
+  const out=document.getElementById("minOut"); out.innerHTML=`<div class="output" id="mno"><div style="display:flex;align-items:center;gap:8px;color:var(--mid)"><span class="spinner"></span>Structuring minutes and extracting actions...</div></div>`;
+  const mno=document.getElementById("mno");
+  try{
+    const r=await callClaude(`Structure this meeting transcript into GIGF minutes. Return:\n### Summary\n2-3 lines.\n### Decisions\nBullet list of decisions taken.\n### Action items\nA table-style list: Owner | Action | Due date. Infer reasonable due dates where implied.\n\nTranscript:\n${t}`,"You are the GIGF meeting minutes engine. Factual, structured, capture every action with an owner.");
+    mno.innerHTML=fmtOutput(r);
+  }catch(e){ mno.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Structure minutes and actions";
+}
+function renderLP(){
+  return `<div class="pt">LP Reporting Assistant</div><div class="ps">Assembles portfolio updates, dealflow metrics and commentary into a draft LP reporting package using past templates. Reviewed before any LP sees it.</div>
+<div class="lc"><div class="lct">Generate LP report draft</div><div style="font-size:13px;color:var(--mid);margin-bottom:4px">Q3 2026. Pulls pipeline metrics and produces a draft narrative.</div><button class="btn-run" id="runLp" onclick="runLP()">Generate draft package</button></div>
+<div id="lpOut"></div>`;
+}
+async function runLP(){
+  if(!ensureKey()) return;
+  const btn=document.getElementById("runLp"); btn.disabled=true; btn.textContent="Generating...";
+  const out=document.getElementById("lpOut"); out.innerHTML=`<div class="output" id="lpo"></div>`;
+  const lpo=document.getElementById("lpo");
+  await runScan(lpo,["Salesforce pipeline","Portfolio updates","Approved filings","Prior LP template"]);
+  const pipeline=deals.map(d=>`${d.company} (${d.sector}, tier ${d.tier})`).join("; ");
+  try{
+    const r=await callClaude(`Draft a Q3 2026 LP reporting package summary for Meridiam GIGF. Pipeline: ${pipeline}. Portfolio includes iwell and Chargepoly.\n\nReturn:\n### Executive summary\n3-4 lines on fund activity this quarter.\n### Dealflow summary\nNew, advanced, and declined, with rough counts.\n### Sector and geography coverage\nBrief factual read.\n### Portfolio highlights\nOne line each on iwell and Chargepoly (plausible, factual tone).\n### Next quarter focus\n2-3 priorities.\n\nInstitutional tone. No marketing language.`,"You are the Meridiam GIGF LP reporting engine. Institutional, factual, measured tone.");
+    lpo.innerHTML=fmtOutput(r)+`<div style="margin-top:14px;font-size:11px;color:var(--light)">Draft for review by Eric and Yannick before submission.</div>`;
+  }catch(e){ lpo.innerHTML=errMsg(e); }
+  btn.disabled=false; btn.textContent="Generate draft package";
+}
+function renderStatus(){
+  const grps=[["Salesforce",[["Connected App and integration user","l"],["Permission sets assigned","l"],["MCP Server activation","p"]]],["Microsoft 365",[["SharePoint read","l"],["Calendar read","l"],["SharePoint page write","w"],["Mail.Read and Mail.ReadWrite","w"]]],["Azure",[["Key Vault","w"],["Function App","w"],["Power Automate premium","w"]]],["Research APIs",[["Pappers","w"],["Grata MCP","w"],["AlphaSense","w"],["PitchBook","w"],["Capital IQ","w"],["Crunchbase","s"]]],["AI",[["Anthropic API — active in this demo","l"],["Anthropic org account","w"]]]];
+  const ic=s=>s==="l"?`<span class="ck">✓</span>`:s==="p"?`<span class="cw">⏳</span>`:s==="w"?`<span class="cw">◐</span>`:`<span class="cs">◇</span>`;
+  const lb=s=>s==="l"?`<span class="pill p-live">Live</span>`:s==="p"?`<span class="pill p-pend">Pending</span>`:s==="w"?`<span class="pill p-wait">Awaiting IT</span>`:`<span class="pill p-soon">Soon</span>`;
+  return `<div class="pt">Access and Status</div><div class="ps">Every dependency. Most modules are built and waiting on access, not development.</div>
+<div class="sr"><div class="sc" style="border-color:var(--green)"><div class="sv">8</div><div class="sl">Live</div></div><div class="sc" style="border-color:var(--amber)"><div class="sv">10</div><div class="sl">Awaiting IT</div></div><div class="sc" style="border-color:var(--blue)"><div class="sv">1</div><div class="sl">Pending</div></div><div class="sc" style="border-color:var(--purple)"><div class="sv">2</div><div class="sl">Coming soon</div></div></div>
+${grps.map(g=>`<div class="lc" style="margin-bottom:12px"><div class="lct">${g[0]}</div>${g[1].map(r=>`<div class="lr">${ic(r[1])}<span style="flex:1">${r[0]}</span>${lb(r[1])}</div>`).join("")}</div>`).join("")}`;
+}
+
+// ---------- DETAIL ----------
+function openD(id){const d=deals.find(x=>x.id===id);document.getElementById("dp").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px"><div><div style="font-size:17px;font-weight:700;color:var(--navy)">${d.company}</div><div style="font-size:13px;color:var(--mid);margin-top:2px">${d.country} — ${d.sector}</div></div><button onclick="closeD()" style="background:none;border:none;font-size:19px;cursor:pointer;color:var(--mid)">✕</button></div><div style="display:flex;gap:7px;margin-bottom:18px">${tb(d.tier)}${stgb(d.stage)}${stsb(d.status)}</div>${[["Project lead",d.lead],["Adviser",d.adviser],["Deal size",d.size],["Next step",d.nextStep]].map(f=>`<div style="margin-bottom:13px"><div style="font-size:10px;color:var(--light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px">${f[0]}</div><div style="font-size:13px">${f[1]}</div></div>`).join("")}<div style="border-top:1px solid #eef2f8;padding-top:14px;margin-top:6px"><div style="font-size:10px;color:var(--light);text-transform:uppercase;margin-bottom:9px">Actions</div><div style="display:flex;flex-direction:column;gap:7px"><button class="btn-run" style="margin:0;width:100%" onclick="go('intake');closeD()">Generate one-pager</button><button class="btn-run2" style="margin:0;width:100%" onclick="go('lbo');closeD()">Run buyout analysis</button><button class="btn-run2" style="margin:0;width:100%;background:#eef2f8;color:var(--text)" onclick="go('memory');closeD()">Check decision memory</button></div></div>`;document.getElementById("dp").classList.add("open");document.getElementById("ov2").classList.add("open");}
+function closeD(){document.getElementById("dp").classList.remove("open");document.getElementById("ov2").classList.remove("open");}
+
+// ---------- ADMIN ----------
+function openAdmin(){
+  const m=document.getElementById("adminModal");
+  const inner=document.getElementById("adminInner");
+  if(!authed){
+    inner.innerHTML=`<h2>Admin access</h2><p>Enter the admin password to manage the connection.</p><label>Password</label><input class="inp" id="pwIn" type="password" placeholder="Password"><div class="modal-btns"><button class="mbtn gh" onclick="closeAdmin()">Cancel</button><button class="mbtn pr" onclick="checkPw()">Unlock</button></div>`;
+  } else {
+    inner.innerHTML=`<h2>Admin panel</h2><p>Manage the Claude API connection and view data source status.</p>
+<label>Claude API key</label><input class="inp" id="keyIn" type="password" placeholder="sk-ant-..." value="${API_KEY}">
+<div style="font-size:11px;color:var(--light);margin-top:5px">Stored only in this browser session. Never written to the page or saved.</div>
+<label style="margin-top:16px">Change admin password</label><input class="inp" id="newPw" type="password" placeholder="New password (optional)">
+<div style="margin-top:18px"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px">Data source status</div>
+${[["Claude engine",API_KEY?"Connected":"Not connected"],["Salesforce","MCP activation pending"],["SharePoint","Read live"],["Microsoft 365 Calendar","Read live"],["Research APIs","Awaiting IT"]].map(s=>`<div class="status-line"><span>${s[0]}</span><span style="color:${s[1].includes("Connected")||s[1].includes("live")?'var(--green)':'var(--amber)'}">${s[1]}</span></div>`).join("")}</div>
+<div class="modal-btns"><button class="mbtn gh" onclick="closeAdmin()">Close</button><button class="mbtn pr" onclick="saveAdmin()">Save</button></div>`;
+  }
+  m.classList.add("open");
+}
+function closeAdmin(){document.getElementById("adminModal").classList.remove("open");}
+function checkPw(){
+  const pw=document.getElementById("pwIn").value;
+  if(pw===ADMIN_PW){ authed=true; openAdmin(); }
+  else { document.getElementById("pwIn").style.borderColor="var(--red)"; }
+}
+function saveAdmin(){
+  const k=document.getElementById("keyIn").value.trim();
+  const np=document.getElementById("newPw").value.trim();
+  if(k) API_KEY=k;
+  if(np) ADMIN_PW=np;
+  updateConn();
+  closeAdmin();
+}
+function updateConn(){
+  document.getElementById("connLabel").textContent=API_KEY?"Engine connected":"Connect API to activate";
+}
+function ensureKey(){
+  if(!API_KEY){ openAdmin(); return false; }
+  return true;
+}
+function errMsg(e){
+  const t=(e&&e.message)||"";
+  if(t.includes("no-key")) return `<div style="color:var(--amber)">Connect the Claude API key in the Admin panel first.</div>`;
+  if(t.includes("401")||t.includes("authentication")) return `<div style="color:var(--red)">API key rejected. Check the key in the Admin panel.</div>`;
+  if(t.includes("429")) return `<div style="color:var(--amber)">Rate limited. Wait a moment and try again.</div>`;
+  return `<div style="color:var(--red)">Request failed. ${t.slice(0,160)}</div>`;
+}
+
+// ---------- ROUTER ----------
+function go(v){state.v=v;document.querySelectorAll(".ni").forEach(n=>n.classList.toggle("active",n.dataset.v===v));render();document.querySelector(".content").scrollTop=0;}
+function setT(t){state.tier=t;render();}
+function setSt(s){state.stage=s;render();}
+function render(){
+  const map={home:renderHome,research:renderResearch,intake:renderIntake,pipeline:renderPipeline,newdeals:renderNewDeals,lbo:renderLBO,newsletter:renderNewsletter,memory:renderMemory,advisors:renderAdvisors,synergy:renderSynergy,coverage:renderCoverage,datahealth:renderDataHealth,minutes:renderMinutes,lp:renderLP,digest:renderDigest,status:renderStatus};
+  document.getElementById("C").innerHTML=(map[state.v]||renderHome)();
+}
+document.querySelectorAll(".ni").forEach(n=>n.addEventListener("click",()=>go(n.dataset.v)));
+document.getElementById("ov2").addEventListener("click",closeD);
+document.getElementById("adminModal").addEventListener("click",e=>{if(e.target.id==="adminModal")closeAdmin();});
+document.addEventListener("input",e=>{if(e.target.id==="si"){state.q=e.target.value;if(state.v==="pipeline")render();}});
+render();
+</script>
+</body>
+</html>
