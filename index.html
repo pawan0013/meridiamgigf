@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PE Growth Intelligence | Platform</title><meta name="robots" content="noindex,nofollow,noarchive">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--nv:#1a2744;--nh:#24314f;--nb:#2c3a58;--bl:#2563b8;--ac:#16b8a6;--bg:#f4f7fb;--wh:#fff;--tx:#1a2744;--md:#5a6b85;--lt:#8fa0b8;--bd:#e2e8f2;--hv:#eaf3fc;--gn:#0a8754;--gb:#e0f7ee;--am:#b45309;--ab:#fdf1dc;--rd:#c0392b;--rb:#fce8ea;--pr:#6d28d9;--pb:#ede9fe}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--tx);height:100vh;overflow:hidden}
+.app{display:flex;height:100vh}
+/* Sidebar */
+.sb{width:260px;background:var(--nv);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}.sb::-webkit-scrollbar{width:0}
+.sbr{padding:16px 18px;border-bottom:1px solid var(--nb);display:flex;align-items:center;gap:10px}
+.sbm{width:32px;height:32px;background:linear-gradient(135deg,var(--ac),var(--bl));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px;flex-shrink:0}
+.sbn{font-size:13px;font-weight:700;color:#fff}.sbs{font-size:10px;color:var(--lt);margin-top:1px}
+.sg{padding:10px 12px 2px}
+.sgl{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#4a5f7a;padding:0 8px 5px}
+.ni{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;cursor:pointer;color:#9aaec7;font-size:12.5px;margin-bottom:1px;transition:background .12s,color .12s;position:relative}
+.ni:hover{background:var(--nh);color:#ccd8e8}.ni.active{background:var(--nh);color:#fff;font-weight:600}
+.ni .ic{width:15px;text-align:center;font-size:12px;flex-shrink:0}
+.ni .lb{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ni .ii{width:14px;height:14px;border-radius:50%;background:#2c3a58;color:#6b7f9e;font-size:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:help;font-weight:700;border:1px solid #3a4d6a;transition:background .1s}
+.ni .ii:hover{background:var(--ac);color:#fff;border-color:var(--ac)}
+.ni .ct{background:var(--ac);color:var(--nv);font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px}
+.tooltip{position:fixed;background:#0f1e38;color:#e2ecf8;font-size:11px;padding:5px 9px;border-radius:5px;white-space:nowrap;z-index:999;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.4);display:none}
+.sff{margin-top:auto;padding:12px 18px;border-top:1px solid var(--nb);display:flex;align-items:center;justify-content:space-between}
+.sfu{font-size:11px;color:#9aaec7}.sfg{cursor:pointer;color:#6b7f9e;font-size:15px;background:none;border:none}.sfg:hover{color:#fff}
+/* Main */
+.mn{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topb{background:var(--wh);padding:10px 22px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:12px}
+.si{flex:1;max-width:520px;padding:7px 12px;border:1px solid var(--bd);border-radius:7px;font-size:12.5px;font-family:inherit;outline:none;background:var(--bg)}.si:focus{border-color:var(--bl);background:#fff}
+.trr{margin-left:auto;display:flex;align-items:center;gap:11px}
+.sy{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--lt)}
+.sdd{width:7px;height:7px;border-radius:50%;background:#4a5f7a}.sdd.on{background:var(--ac);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.4}}
+.bp{background:var(--nv);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.ctn{flex:1;overflow-y:auto;padding:20px 22px}
+/* Typography */
+.pt{font-size:17px;font-weight:700;color:var(--nv);margin-bottom:3px}
+.ps{font-size:13px;color:var(--md);margin-bottom:18px;max-width:720px;line-height:1.55}
+/* Stat row */
+.sr{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.sc{background:var(--wh);border-radius:9px;padding:13px 15px;flex:1;min-width:100px;border-left:3px solid var(--bl)}
+.sv{font-size:22px;font-weight:800;color:var(--nv);line-height:1}.sl2{font-size:11px;color:var(--md);margin-top:4px}
+/* Pills */
+.pill{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.pg{background:var(--gb);color:var(--gn)}.pw{background:var(--ab);color:var(--am)}.pp{background:var(--pb);color:var(--pr)}.ppn{background:#e8f4fd;color:var(--bl)}.prd{background:var(--rb);color:var(--rd)}
+/* Table card */
+.tc{background:var(--wh);border-radius:9px;border:1px solid var(--bd);overflow:hidden;margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:var(--nv)}
+th{padding:9px 12px;text-align:left;color:#8fa0b8;font-weight:500;font-size:11px}
+tbody tr{border-bottom:1px solid #eef2f8;transition:background .1s}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody tr:hover{background:var(--hv)!important}
+td{padding:9px 12px;vertical-align:middle}td.cn{font-weight:600;color:var(--nv)}td.m{color:var(--md)}
+.tf{padding:9px 15px;color:var(--lt);font-size:11.5px;border-top:1px solid #eef2f8}
+/* Tier badges */
+.tier{width:22px;height:22px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.t0{background:#1a2744}.tS{background:#2563b8}.t1{background:#16b8a6}.t2{background:#8fa0b8}
+/* Stage / Status */
+.stg{padding:2px 7px;border-radius:4px;font-size:11px;font-weight:500}.sA{background:#e8f4fd;color:var(--bl)}.sSt{background:#eef2f7;color:var(--md)}.sCl{background:var(--ab);color:var(--am)}
+.sts{padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600}
+/* Filters */
+.fr2{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap;align-items:center}
+.fll{font-size:10px;color:var(--lt);font-weight:700;text-transform:uppercase}
+.fbt{padding:5px 11px;border-radius:6px;border:none;cursor:pointer;font-size:11.5px;font-weight:500;font-family:inherit;background:#eef2f8;color:var(--md)}.fbt.on{background:var(--nv);color:#fff;font-weight:600}
+/* Hero */
+.hero{background:linear-gradient(130deg,var(--nv),#1e3055 60%,#162540);border-radius:12px;padding:24px 28px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-40px;top:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(22,184,166,.17),transparent 65%)}
+.hl{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--ac);text-transform:uppercase}
+.ht2{font-size:22px;font-weight:800;margin:6px 0;line-height:1.2}
+.hss{font-size:12.5px;color:#b8cae0;max-width:540px;line-height:1.6}
+.hm{display:flex;gap:28px;margin-top:18px;position:relative;z-index:1;flex-wrap:wrap}
+.hvv{font-size:24px;font-weight:800}.hmm{font-size:10px;color:#8fa0b8;margin-top:1px}
+.acc{color:var(--ac)}
+/* Layout grids */
+.dg{display:grid;grid-template-columns:2fr 1fr;gap:13px;margin-bottom:13px}@media(max-width:900px){.dg{grid-template-columns:1fr}}
+.sp2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:13px}@media(max-width:750px){.sp2{grid-template-columns:1fr}}
+.sp3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:13px}@media(max-width:900px){.sp3{grid-template-columns:1fr 1fr}}
+/* Cards */
+.cd{background:var(--wh);border-radius:9px;padding:15px;border:1px solid var(--bd)}
+.cdt{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:11px;display:flex;align-items:center;justify-content:space-between}
+.cdr{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #eef2f8;font-size:12.5px}.cdr:last-child{border-bottom:none}
+.lc{background:var(--wh);border-radius:9px;padding:15px;border:1px solid var(--bd);margin-bottom:11px}
+.lct{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:10px}
+.lr{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #eef2f8;font-size:12.5px;line-height:1.4}.lr:last-child{border-bottom:none}
+.ck{color:var(--gn);flex-shrink:0}.cw2{color:var(--am);flex-shrink:0}.cs{color:var(--pr);flex-shrink:0}
+/* Approval queue */
+.aq{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid #eef2f8}.aq:last-child{border-bottom:none}
+.aqi{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;background:#eef2f8;flex-shrink:0}
+.aqt{font-size:12.5px;font-weight:600;color:var(--nv)}.aqs{font-size:11px;color:var(--md)}
+.aqb{margin-left:auto;display:flex;gap:5px}
+.ab{border:none;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
+.aby{background:var(--gb);color:var(--gn)}.abn{background:var(--rb);color:var(--rd)}
+/* Log items */
+.lgi{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid #eef2f8;font-size:12px}.lgi:last-child{border-bottom:none}
+.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px}.lok{background:var(--gn)}.lpn{background:var(--am)}
+/* Intake flow */
+.fd{display:flex;align-items:center;flex-wrap:wrap;background:var(--wh);border-radius:10px;padding:18px;border:1px solid var(--bd);margin-bottom:13px}
+.fs{flex:1;min-width:75px;text-align:center;padding:0 3px}
+.fs .fi{width:36px;height:36px;border-radius:7px;background:#eef2f8;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 5px;transition:all .3s}
+.fs.done .fi{background:var(--gb)}.fs.active .fi{background:var(--ac);color:#fff;animation:pu 1s infinite}
+.fs .ft{font-size:10px;font-weight:700;color:var(--nv)}.fs .fu{font-size:9px;color:var(--lt);margin-top:1px}
+.fa2{color:var(--lt);font-size:13px;padding:0 1px;align-self:center;margin-bottom:14px}
+/* Research input */
+.riw{background:var(--wh);border:2px solid var(--bd);border-radius:12px;padding:13px 15px;display:flex;align-items:flex-start;gap:9px;max-width:700px;margin:16px auto 0}.riw:focus-within{border-color:var(--ac)}
+.rta{flex:1;border:none;outline:none;font-family:inherit;font-size:13.5px;resize:none;color:var(--tx);min-height:22px}
+.rsb{background:var(--nv);color:#fff;border:none;width:32px;height:32px;border-radius:7px;cursor:pointer;font-size:14px;flex-shrink:0}
+/* Chips */
+.chip{display:flex;align-items:center;gap:5px;background:var(--wh);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:11.5px;color:var(--md);font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%}.dl{background:var(--gn)}.dw{background:var(--am)}
+/* Inputs */
+.ta{width:100%;border:1px solid var(--bd);border-radius:8px;padding:11px;font-family:inherit;font-size:12.5px;resize:vertical;min-height:76px;outline:none;color:var(--tx)}.ta:focus{border-color:var(--bl)}
+.inp{width:100%;border:1px solid var(--bd);border-radius:7px;padding:9px 11px;font-family:inherit;font-size:12.5px;outline:none;margin-bottom:7px;color:var(--tx)}.inp:focus{border-color:var(--bl)}
+/* Buttons */
+.br2{background:var(--ac);color:#fff;border:none;padding:8px 16px;border-radius:7px;font-weight:600;font-size:12.5px;cursor:pointer;font-family:inherit;margin-top:9px}.br2:disabled{opacity:.45;cursor:not-allowed}
+.bs3{background:var(--nv);color:#fff;border:none;padding:8px 16px;border-radius:7px;font-weight:600;font-size:12.5px;cursor:pointer;font-family:inherit;margin-top:9px}
+.bg2{background:#eef2f8;color:var(--tx);border:none;padding:8px 16px;border-radius:7px;font-size:12.5px;cursor:pointer;font-family:inherit;margin-top:9px}
+.qc{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:5px;border:1px solid var(--bd);font-size:11px;cursor:pointer;background:var(--wh);color:var(--md);font-family:inherit}.qc:hover{border-color:var(--ac);color:var(--tx)}
+/* Output */
+.out{background:var(--wh);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-top:13px;font-size:12.5px;line-height:1.7;color:var(--tx);white-space:pre-wrap}.out h3{font-size:13.5px;color:var(--nv);margin:13px 0 5px;font-weight:700}.out strong{color:var(--nv)}
+/* Feedback bar */
+.fbr{background:var(--wh);border:1px solid var(--bd);border-radius:9px;padding:11px 14px;margin-top:11px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.fbl{font-size:12px;font-weight:600;color:var(--md)}
+.fbb{border:1px solid var(--bd);background:var(--wh);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}.fbb:hover{border-color:var(--ac)}.fbb.ay{background:var(--gb);border-color:var(--gn)}.fbb.an{background:var(--rb);border-color:var(--rd)}
+.fbi{flex:1;min-width:110px;border:1px solid var(--bd);border-radius:6px;padding:5px 9px;font-size:11.5px;font-family:inherit;outline:none}
+.fbs{background:var(--nv);color:#fff;border:none;padding:5px 11px;border-radius:6px;font-size:11.5px;cursor:pointer;font-family:inherit;font-weight:600}
+/* Scan animation */
+.scan{display:flex;align-items:center;gap:9px;padding:4px 0;font-size:12.5px;color:var(--md);opacity:0;animation:fadein .35s forwards}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+.spn{width:12px;height:12px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .65s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Info box */
+.ib{background:#f0f7ff;border:1px solid #c3d9f5;border-radius:7px;padding:9px 13px;font-size:12px;color:#1d4ed8;margin-bottom:16px;line-height:1.5}
+/* Portfolio company cards */
+.pfc{background:var(--wh);border-radius:9px;padding:14px;border:1px solid var(--bd);cursor:pointer;transition:border-color .15s,transform .15s}.pfc:hover{border-color:var(--ac);transform:translateY(-1px)}
+.pfc strong{font-size:13px;color:var(--nv);display:block;margin-bottom:3px}.pfc .ps2{font-size:11.5px;color:var(--md)}.pfc .pm{display:flex;gap:12px;margin-top:6px;font-size:11.5px}.pfc .pm span{color:var(--lt)}.pfc .pm b{color:var(--tx)}
+.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px;margin-bottom:18px}
+/* Governance */
+.govp{background:var(--wh);border-radius:9px;border:1px solid var(--bd);margin-bottom:11px;overflow:hidden}
+.govh{padding:11px 15px;background:var(--nv);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center}.govrl{font-size:10.5px;color:var(--lt);margin-left:auto}
+.govbd{padding:13px 15px}.govs{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--md);margin:9px 0 5px}
+.govi{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;padding:4px 0;line-height:1.4}
+/* Tabs */
+.tabs{display:flex;gap:0;margin-bottom:13px;border-bottom:2px solid var(--bd)}.tab{padding:8px 16px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--md);border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .1s}.tab.on{color:var(--nv);border-bottom-color:var(--ac)}
+/* Bar charts */
+.barw{height:7px;background:#eef2f8;border-radius:4px;margin-top:3px}.bar{height:7px;border-radius:4px;background:var(--ac)}
+/* Modal */
+.mo{position:fixed;inset:0;background:rgba(20,31,54,.5);z-index:200;display:none;align-items:center;justify-content:center}.mo.open{display:flex}
+.mdd{background:#fff;border-radius:13px;padding:24px;width:420px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.3)}.mdd h2{font-size:16px;color:var(--nv);margin-bottom:5px}.mdd p{font-size:12.5px;color:var(--md);margin-bottom:13px;line-height:1.5}.mdd label{font-size:11.5px;font-weight:600;color:var(--nv);display:block;margin:11px 0 4px}
+.mi{width:100%;border:1px solid var(--bd);border-radius:7px;padding:8px 11px;font-family:inherit;font-size:12.5px;outline:none}
+.mbt{display:flex;gap:7px;margin-top:16px}.mb{flex:1;padding:9px;border-radius:7px;border:none;font-weight:600;font-size:12.5px;cursor:pointer;font-family:inherit}.mbp{background:var(--nv);color:#fff}.mbg{background:#eef2f8;color:var(--tx)}
+/* Deal detail drawer */
+.dp{position:fixed;right:-400px;top:0;bottom:0;width:370px;background:#fff;box-shadow:-4px 0 22px rgba(0,0,0,.13);z-index:100;padding:20px;overflow-y:auto;transition:right .2s}.dp.open{right:0}
+.ov2{position:fixed;inset:0;background:rgba(20,31,54,.26);z-index:90;display:none}.ov2.open{display:block}
+.sln{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eef2f8;font-size:12px}.sln:last-child{border-bottom:none}
+/* Timeline row */
+.tlr{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #eef2f8;font-size:12.5px;line-height:1.4}.tlr:last-child{border-bottom:none}
+.tldt{font-size:11px;color:var(--lt);flex-shrink:0;min-width:58px;padding-top:1px}
+</style></head><body>
+<div class="tooltip" id="tip"></div>
+<div class="app">
+<!-- SIDEBAR -->
+<div class="sb">
+  <div class="sbr">
+    <div class="sbm">P</div>
+    <div><div class="sbn">PE Growth Intelligence</div><div class="sbs">Green Infrastructure Fund</div></div>
+  </div>
+  <!-- OVERVIEW -->
+  <div class="sg"><div class="sgl">Overview</div>
+    <div class="ni active" data-v="digest"><span class="ic">&#9776;</span><span class="lb">Weekly Digest</span><div class="ii" data-tip="Most important pipeline changes this week">i</div></div>
+    <div class="ni" data-v="workflows"><span class="ic">&#9881;</span><span class="lb">Workflows</span><div class="ii" data-tip="All platform automations explained">i</div></div>
+    <div class="ni" data-v="home"><span class="ic">&#11026;</span><span class="lb">Dashboard</span><div class="ii" data-tip="Your personalised view and approval queue">i</div></div>
+  </div>
+  <!-- DEALFLOW -->
+  <div class="sg"><div class="sgl">Dealflow</div>
+    <div class="ni" data-v="intake"><span class="ic">&#9993;</span><span class="lb">Deal Intake and One-Pager</span><div class="ii" data-tip="Paste a teaser, get a full one-pager in under 2 minutes">i</div></div>
+    <div class="ni" data-v="pipeline"><span class="ic">&#9638;</span><span class="lb">Pipeline and Data Quality</span><div class="ii" data-tip="Live dealflow with Salesforce health checks">i</div><span class="ct">12</span></div>
+    <div class="ni" data-v="newsletter"><span class="ic">&#9639;</span><span class="lb">Newsletter</span><div class="ii" data-tip="Weekly deal newsletter generated and published automatically">i</div></div>
+  </div>
+  <!-- KNOWLEDGE -->
+  <div class="sg"><div class="sgl">Knowledge</div>
+    <div class="ni" data-v="memory"><span class="ic">&#9719;</span><span class="lb">Decision Memory</span><div class="ii" data-tip="Every company ever reviewed, instantly searchable">i</div></div>
+    <div class="ni" data-v="research"><span class="ic">&#10022;</span><span class="lb">Research Hub</span><div class="ii" data-tip="Multi-source research across all connected databases">i</div></div>
+  </div>
+  <!-- RELATIONSHIPS -->
+  <div class="sg"><div class="sgl">Relationships</div>
+    <div class="ni" data-v="rl"><span class="ic">&#9993;</span><span class="lb">Relationship Intelligence</span><div class="ii" data-tip="Banker and LP relationship timelines, stage detection, personalised drafts">i</div></div>
+    <div class="ni" data-v="fi"><span class="ic">&#9670;</span><span class="lb">Fundraising Intelligence</span><div class="ii" data-tip="Prospective LPs, DDQs, commitment pipeline, meeting briefings">i</div></div>
+  </div>
+  <!-- PORTFOLIO -->
+  <div class="sg"><div class="sgl">Portfolio</div>
+    <div class="ni" data-v="pvc"><span class="ic">&#9671;</span><span class="lb">Portfolio Value Creation</span><div class="ii" data-tip="Acquisition targets, commercial partners, synergies for each portfolio company">i</div></div>
+  </div>
+  <!-- REPORTING -->
+  <div class="sg"><div class="sgl">Reporting</div>
+    <div class="ni" data-v="lp"><span class="ic">&#9648;</span><span class="lb">LP Reporting</span><div class="ii" data-tip="Quarterly, monthly, annual and LP-specific reporting packages">i</div></div>
+    <div class="ni" data-v="coverage"><span class="ic">&#9707;</span><span class="lb">Coverage Dashboard</span><div class="ii" data-tip="Opportunities by sector, geography, adviser activity, IC conversion">i</div></div>
+  </div>
+  <!-- GOVERNANCE -->
+  <div class="sg"><div class="sgl">Governance</div>
+    <div class="ni" data-v="hiw"><span class="ic">&#9733;</span><span class="lb">How It Works</span><div class="ii" data-tip="Plain-language guide to every workflow">i</div></div>
+    <div class="ni" data-v="mustdo"><span class="ic">&#9745;</span><span class="lb">Must Do / Never Do</span><div class="ii" data-tip="Governance rules per role per workflow">i</div></div>
+    <div class="ni" data-v="alog"><span class="ic">&#9650;</span><span class="lb">Agent Activity Log</span><div class="ii" data-tip="Every platform action logged, immutable, seven-year retention">i</div></div>
+    <div class="ni" data-v="status"><span class="ic">&#9651;</span><span class="lb">Access and Status</span><div class="ii" data-tip="Every system connection and its current status">i</div></div>
+  </div>
+  <div class="sff"><div class="sfu" id="usrL">operations@fund.com</div><button class="sfg" onclick="openAdmin()">&#9881;</button></div>
+</div>
+
+<!-- MAIN -->
+<div class="mn">
+  <div class="topb">
+    <input class="si" id="si2" placeholder="Search deals, companies, sectors, advisers...">
+    <div class="trr">
+      <div class="sy"><span class="sdd" id="sdot"></span><span id="connL">Connect API in Admin</span></div>
+      <button class="bp" onclick="openAdmin()">Admin</button>
+    </div>
+  </div>
+  <div class="ctn" id="C"></div>
+</div>
+</div>
+
+<!-- Deal detail drawer -->
+<div class="ov2" id="ov2"></div>
+<div class="dp" id="dp"></div>
+
+<!-- Admin modal -->
+<div class="mo" id="aM"><div class="mdd" id="aI"></div></div>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+let AK="",APW="investor2026",aut=false;
+let st={v:"digest",q:"",tier:"all",stage:"all",lpTab:"quarterly",pTab:"pipe",rlTab:"bankers",fiTab:"lp",pvTab:"search",memSrc:"all"};
+let aL=[];
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const D=[
+  {id:1,tier:"0",stage:"Active",co:"Helion",cn:"France",sec:"Strategic Metals Recycling",ld:"Partner A",adv:"Oakley",nx:"LOI sent",s:"sp",as:"Partner A"},
+  {id:2,tier:"0",stage:"Active",co:"Solaris (Pulse)",cn:"France",sec:"Energy Optimisation",ld:"Partner B",adv:"N/D",nx:"Send NDA and receive IM",s:"sp",as:"Partner B"},
+  {id:3,tier:"S",stage:"Active",co:"Carbix Tech",cn:"UK",sec:"Low-Carbon Fertiliser",ld:"Partner B",adv:"Lincoln",nx:"NDA and one-pager",s:"sp",as:"Analyst"},
+  {id:4,tier:"S",stage:"Active",co:"Nordtek",cn:"Denmark",sec:"Nanoimprint Manufacturing",ld:"Partner A",adv:"N/D",nx:"Management meeting",s:"si",as:"Partner A"},
+  {id:5,tier:"1",stage:"Active",co:"Electra",cn:"France",sec:"Electrical Engineering",ld:"Partner B",adv:"Alantra",nx:"NDA in execution",s:"si",as:"Partner B"},
+  {id:6,tier:"1",stage:"Active",co:"Zevolt",cn:"France",sec:"Heavy-Duty EV Charging",ld:"Partner A",adv:"N/D",nx:"IC memo preparation",s:"sp",as:"Partner A"},
+  {id:7,tier:"1",stage:"Standby",co:"Fluxen Energy",cn:"France",sec:"VPP and HEMS",ld:"Partner B",adv:"N/D",nx:"Await Series B close",s:"sp",as:"Partner B"},
+  {id:8,tier:"1",stage:"Active",co:"Proj. Casoar",cn:"France",sec:"BESS Portfolio",ld:"Partner A",adv:"Raymond James",nx:"Modelling update",s:"sn",as:"Analyst"},
+  {id:9,tier:"2",stage:"Classify",co:"Ignatec",cn:"Germany",sec:"Sustainable Fuels",ld:"TBC",adv:"N/D",nx:"First call booked",s:"sn",as:"Analyst"},
+  {id:10,tier:"2",stage:"Classify",co:"Enverin",cn:"Germany",sec:"Energy Trading Software",ld:"TBC",adv:"N/D",nx:"Deck review",s:"sn",as:"Analyst"},
+  {id:11,tier:"2",stage:"Standby",co:"Verdegen",cn:"France",sec:"Plastic Recycling",ld:"Partner B",adv:"N/D",nx:"Monitor fundraise",s:"sn",as:"Partner B"},
+  {id:12,tier:"2",stage:"Standby",co:"Calystra",cn:"US",sec:"Alternative Protein",ld:"Partner B",adv:"AquaSpark",nx:"Too early, monitor",s:"sn",as:"Partner B"}
+];
+
+const PF=[
+  {c:"Circula",sc:"Circular Economy",inv:"Nov 2021",am:"10.0m",d:"Electronics refurbishment",mo:"1.55x",rv:"98.0m",eb:"2.3m"},
+  {c:"Swiftly",sc:"Clean Mobility",inv:"Dec 2021",am:"10.3m",d:"Last-mile delivery",mo:"1.62x",rv:"51.7m",eb:"5.3m"},
+  {c:"Platia",sc:"Agritech",inv:"Mar 2022",am:"10.0m",d:"Digital catering",mo:"1.04x",rv:"10.8m",eb:"0.4m"},
+  {c:"Enviro Blue",sc:"Low-Carbon",inv:"Jun 2022",am:"12.0m",d:"ESG data platform",mo:"N/D",rv:"N/D",eb:"N/D"},
+  {c:"Orbis",sc:"Circular Economy",inv:"Sep 2023",am:"N/D",d:"Computer refurbishment",mo:"0.50x",rv:"32.7m",eb:"-3.3m"},
+  {c:"Elara",sc:"Clean Mobility",inv:"Mar 2024",am:"N/D",d:"EV battery cooling",mo:"N/D",rv:"N/D",eb:"N/D"},
+  {c:"Optima",sc:"Sustainable Cities",inv:"Jan 2025",am:"13.5m",d:"Building performance",mo:"1.36x",rv:"N/D",eb:"N/D"},
+  {c:"Iridia",sc:"Low-Carbon",inv:"Apr 2025",am:"15.0m",d:"Energy storage",mo:"1.00x",rv:"N/D",eb:"N/D"},
+  {c:"Breva",sc:"New",inv:"2026",am:"N/D",d:"ESG KPI framework",mo:"N/D",rv:"N/D",eb:"N/D"}
+];
+
+// Decision Memory — entries with source type
+const MM=[
+  {co:"Matexup",dt:"Mar 2023",rv:"Partner B",dc:"Pass",rs:"Too early. No revenues.",src:"Screening"},
+  {co:"Chainevo",dt:"Aug 2026",rv:"Partner A",dc:"Pass",rs:"Pipeline unvalidated.",src:"One-pager"},
+  {co:"Urban Glide",dt:"Sep 2026",rv:"Partner B",dc:"Decline",rs:"Declining top line.",src:"Forum discussion"},
+  {co:"Brivo Water",dt:"Sep 2026",rv:"Partner B",dc:"Decline",rs:"Not fund size.",src:"Pipeline update"},
+  {co:"Terrafix",dt:"Jul 2026",rv:"Lead Partner",dc:"Pass",rs:"Geographic mismatch.",src:"IC materials"},
+  {co:"Lumaxis",dt:"May 2026",rv:"Partner A",dc:"Pass",rs:"Sector outside mandate.",src:"Relationship interaction"},
+  {co:"Novocell",dt:"Feb 2026",rv:"Partner B",dc:"Decline",rs:"Too capital intensive.",src:"LP Report context"},
+  {co:"Arctec",dt:"Jan 2026",rv:"Lead Partner",dc:"Decline",rs:"Management quality.",src:"One-pager"}
+];
+
+const BK=[
+  {n:"A. Morrison",f:"Goldman Sachs",e:"a.morrison@gs.com",t:"Banker",sc:"Energy",la:"Sep 8",ops:3,adv:1,ls:"Sent Helion teaser",nxt:"Follow-up call",sg:"Active",st:"pg"},
+  {n:"P. Dubois",f:"Rothschild",e:"p.dubois@rothschild.com",t:"Banker",sc:"Climate Tech",la:"Sep 5",ops:1,adv:0,ls:"Conference introduction",nxt:"Initial outreach",sg:"First contact",st:"ppn"},
+  {n:"L. Becker",f:"Lazard",e:"l.becker@lazard.com",t:"Banker",sc:"Infrastructure",la:"Aug 28",ops:5,adv:2,ls:"Followed up on Orbis",nxt:"Sector review call",sg:"Active",st:"pg"},
+  {n:"C. Martin",f:"BNP Paribas",e:"c.martin@bnp.com",t:"Banker",sc:"Renewables",la:"Sep 1",ops:2,adv:0,ls:"Sent deck, no response",nxt:"Re-engage or pause",sg:"Cooling",st:"pw"},
+  {n:"T. Nguyen",f:"JP Morgan",e:"t.nguyen@jpmorgan.com",t:"Banker",sc:"Industrials",la:"Jul 15",ops:1,adv:0,ls:"Introductory call",nxt:"Check back Q4",sg:"Inactive",st:"prd"},
+  {n:"S. Weber",f:"Societe Generale",e:"s.weber@sgcib.com",t:"Banker",sc:"Energy Transition",la:"Sep 7",ops:4,adv:2,ls:"Shared Zevolt update",nxt:"IC materials review",sg:"Active",st:"pg"},
+  {n:"M. Petit",f:"Alantra",e:"m.petit@alantra.com",t:"Adviser",sc:"Recycling",la:"Sep 3",ops:3,adv:1,ls:"Sent Electra mandate",nxt:"Check NDA execution",sg:"Active",st:"pg"},
+  {n:"F. Klein",f:"Lincoln International",e:"f.klein@lincolnintl.com",t:"Adviser",sc:"Industrials",la:"Aug 20",ops:2,adv:1,ls:"Carbix Tech intro",nxt:"NDA progress call",sg:"First contact",st:"ppn"},
+  {n:"R. Costa",f:"Raymond James",e:"r.costa@rj.com",t:"Adviser",sc:"Energy",la:"Sep 6",ops:2,adv:1,ls:"Casoar update meeting",nxt:"Modelling discussion",sg:"Cooling",st:"pw"},
+  {n:"H. Dupont",f:"Oakley Advisory",e:"h.dupont@oakley.com",t:"Adviser",sc:"Waste, Energy",la:"Sep 9",ops:4,adv:2,ls:"LOI process update",nxt:"LOI finalisation call",sg:"Active",st:"pg"}
+];
+
+const LP2=[
+  {n:"K. Andersen",o:"Nordic Pension Fund",e:"k.andersen@npf.dk",t:"Pension",g:"Nordics",tk:"EUR 25m",la:"Sep 3",sg:"Committed",st:"pg"},
+  {n:"F. Mueller",o:"Alpine Re",e:"f.mueller@alpinere.ch",t:"Insurance",g:"DACH",tk:"EUR 15m",la:"Aug 28",sg:"DDQ stage",st:"pw"},
+  {n:"C. Herrera",o:"Iberian FoF",e:"c.herrera@iberianfof.es",t:"Fund of Funds",g:"Spain",tk:"EUR 10m",la:"Sep 1",sg:"Active",st:"ppn"},
+  {n:"W. Thompson",o:"Atlantic Endowment",e:"w.thompson@atlantic.com",t:"Endowment",g:"US",tk:"EUR 20m",la:"Jul 15",sg:"First contact",st:"pp"},
+  {n:"B. Leroy",o:"Caisse des Depots",e:"b.leroy@cdc.fr",t:"Sovereign",g:"France",tk:"EUR 30m",la:"Sep 6",sg:"Active",st:"ppn"},
+  {n:"G. Rossi",o:"Generali Investments",e:"g.rossi@generali.com",t:"Insurance",g:"Italy",tk:"EUR 12m",la:"Aug 10",sg:"Cooling",st:"pw"},
+  {n:"D. Schmidt",o:"Bayern Versorgung",e:"d.schmidt@bv.de",t:"Pension",g:"Germany",tk:"EUR 20m",la:"Sep 4",sg:"Active",st:"ppn"},
+  {n:"A. Bernard",o:"Amundi",e:"a.bernard@amundi.com",t:"Asset Manager",g:"France",tk:"EUR 25m",la:"Aug 25",sg:"First contact",st:"pp"}
+];
+
+const DDQ=[
+  {lp:"Alpine Re",q:"Impact measurement methodology",due:"Sep 20",st:"In progress",st2:"pw"},
+  {lp:"Iberian FoF",q:"Management team compensation structure",due:"Sep 22",st:"Draft ready",st2:"ppn"},
+  {lp:"Caisse des Depots",q:"ESG exclusion list and monitoring",due:"Sep 25",st:"Not started",st2:"prd"},
+  {lp:"Nordic Pension Fund",q:"Portfolio concentration limits",due:"Completed Aug 14",st:"Done",st2:"pg"}
+];
+
+const TEASER="Confidential: Project Helios\n\nFrench developer of biogas projects converting organic waste into renewable energy. Founded 2018, 42 employees, Lyon.\n\n2025 revenue: EUR 14m. EBITDA: EUR 2.1m. Four operational sites, two under construction.\n\nRaising EUR 25m growth equity. Advised by Oakley Advisory. Close Q1 2027.";
+
+const stM={si:{l:"Sweet spot",c:"si2"},sp:{l:"Sweet spot TBC",c:"sp"},sn:{l:"Not sweet spot",c:"sn"}};
+const tb=t=>`<span class="tier t${t}">${t}</span>`;
+const sg2=s=>`<span class="stg ${({Active:"sA",Standby:"sSt",Classify:"sCl"})[s]||"sSt"}">${s==="Classify"?"To Classify":s}</span>`;
+const ss2=s=>{const m=stM[s]||stM.sn;return`<span class="sts ${m.c}">${m.l}</span>`;};
+const nw=()=>new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function la(w,s,st2,dt){aL.unshift({t:nw(),w,s,st:st2,dt:dt||""});}
+function fmt(t){return t.replace(/^### (.*)$/gm,'<h3>$1</h3>').replace(/^## (.*)$/gm,'<h3>$1</h3>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^- /gm,'• ');}
+
+// ─── Tooltip ──────────────────────────────────────────────────────────────────
+const tipEl=document.getElementById("tip");
+document.addEventListener("mouseover",e=>{
+  const ii=e.target.closest(".ii");
+  if(ii&&ii.dataset.tip){
+    tipEl.textContent=ii.dataset.tip;
+    tipEl.style.display="block";
+  }
+});
+document.addEventListener("mousemove",e=>{
+  tipEl.style.left=(e.clientX+12)+"px";
+  tipEl.style.top=(e.clientY-6)+"px";
+});
+document.addEventListener("mouseout",e=>{
+  if(!e.target.closest(".ii"))tipEl.style.display="none";
+});
+
+// ─── API ──────────────────────────────────────────────────────────────────────
+async function cc(p,sys){
+  if(!AK)throw new Error("no-key");
+  const t0=Date.now();
+  const r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":AK,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1500,system:sys||"You are a precise M&A analyst at a sustainable infrastructure PE fund. Factual, concise. No marketing language. Never use em dashes. Use role codes: Lead Partner, Partner A, Partner B, Analyst, Operations, CEO, CFO.",messages:[{role:"user",content:p}]})
+  });
+  if(!r.ok)throw new Error(await r.text());
+  const d=await r.json();
+  return{text:d.content.filter(x=>x.type==="text").map(x=>x.text).join("\n"),time:((Date.now()-t0)/1000).toFixed(1),tok:d.usage?d.usage.output_tokens:0};
+}
+async function scn(el,src){
+  el.innerHTML="";
+  for(let i=0;i<src.length;i++){
+    const l=document.createElement("div");l.className="scan";l.style.animationDelay=(i*.11)+"s";
+    l.innerHTML=`<span class="spn"></span>Scanning ${src[i]}...`;el.appendChild(l);
+    await new Promise(r=>setTimeout(r,200));
+    l.innerHTML=`<span style="color:var(--gn)">&#10003;</span><span style="color:var(--tx)">${src[i]}</span>`;
+  }
+  await new Promise(r=>setTimeout(r,80));
+}
+function er(e){const t=(e&&e.message)||"";if(t.includes("no-key"))return'<div style="color:var(--am)">Open Admin and enter your API key.</div>';if(t.includes("401"))return'<div style="color:var(--rd)">API key rejected. Check in Admin.</div>';return`<div style="color:var(--rd)">Failed. ${t.slice(0,120)}</div>`;}
+function ek(){if(!AK){openAdmin();return false;}return true;}
+function fbr(id){return`<div class="fbr" id="fb-${id}"><span class="fbl">Rate</span><div style="display:flex;gap:4px"><div class="fbb" id="fy-${id}" onclick="fv('${id}',1)">&#128077;</div><div class="fbb" id="fn-${id}" onclick="fv('${id}',-1)">&#128078;</div></div><input class="fbi" id="fg-${id}" placeholder="Do this every time"><input class="fbi" id="fb2-${id}" placeholder="Never repeat"><button class="fbs" onclick="fs3('${id}')">Log feedback</button></div>`;}
+function fv(id,v){document.getElementById('fy-'+id).className='fbb'+(v===1?' ay':'');document.getElementById('fn-'+id).className='fbb'+(v===-1?' an':'');}
+function fs3(id){la(id,"Feedback logged","ok");const el=document.getElementById('fb-'+id);if(el)el.innerHTML='<div style="color:var(--gn);font-size:12.5px">&#10003; Feedback logged.</div>';}
+
+// ─── WEEKLY DIGEST ────────────────────────────────────────────────────────────
+function renderDigest(){
+  return`<div class="pt">Weekly Digest</div><div class="ps">Most important pipeline changes this week. Deals advanced, stalled, new, overdue actions.</div>
+<div class="lc"><button class="br2" onclick="runDig()">Generate this week's digest</button></div><div id="digO"></div>`;
+}
+async function runDig(){
+  if(!ek())return;
+  const o=document.getElementById("digO");
+  o.innerHTML=`<div class="out" id="dgo"></div>`;
+  const d=document.getElementById("dgo");
+  await scn(d,["Pipeline changes","Stage movements","Overdue actions"]);
+  const pl=D.map(x=>`${x.co} (tier ${x.tier}, ${x.stage}, ${x.nx})`).join("; ");
+  try{
+    const r=await cc(`Management digest. Pipeline: ${pl}. Return: Deals advanced (2-3), Deals stalled (1-2), New (2-3), Actions overdue (1-2), One thing to watch.`);
+    d.innerHTML=fmt(r.text)+`<div style="margin-top:9px;font-size:11px;color:var(--lt)">${r.time}s | ${r.tok} tokens</div>`;
+    la("Digest","Generated","ok",r.time+"s");o.innerHTML+=fbr("dig");
+  }catch(e){d.innerHTML=er(e);}
+}
+
+// ─── WORKFLOWS ────────────────────────────────────────────────────────────────
+function renderWorkflows(){
+  const wfs=[
+    {n:"Weekly Digest",d:"Scans pipeline, surfaces changes, returns management summary.",s:"Monday 08:00 or on demand. No approval needed."},
+    {n:"Deal Intake",d:"Seven steps: extract fields, memory check, five-criteria screen, enrich sources, draft one-pager, propose Salesforce diff.",s:"Two-step approval: A (content), B (write). Triggered by teaser paste."},
+    {n:"Newsletter",d:"Pipeline pulled, calendar scanned, news gathered, formatted to house template.",s:"Lead Partner reviews and approves. Published to SharePoint."},
+    {n:"Research Hub",d:"Multi-source scan across all connected databases. Returns structured findings.",s:"Any query. No approval required. Feedback bar on every output."},
+    {n:"Decision Memory",d:"Fed by all approved knowledge: screening, one-pagers, pipeline updates, forum discussions, IC materials, LP reports, relationship interactions.",s:"Search returns prior decision, reviewer, reasoning, and source type."},
+    {n:"Portfolio Value Creation",d:"Per-company search across four modes: Acquisition Targets, Commercial Partners, Suppliers, Geographic Expansion.",s:"Select company, choose search mode. PE-language structured output."},
+    {n:"Relationship Intelligence",d:"Full timeline before any action. Detects stage. Generates personalised drafts. Never sends.",s:"Scenario-based. Drafts placed unsent in email client."},
+    {n:"Fundraising Intelligence",d:"Tracks prospective and active LPs, DDQ requests, meeting briefs, follow-ups, commitment pipeline.",s:"Scenario-based. Shows pipeline vs fund target."},
+    {n:"LP Reporting",d:"Four types: quarterly, monthly, annual, LP-specific. Investment Activity, Portfolio Performance, Impact Dashboard.",s:"CEO reviews before any LP sees it."},
+    {n:"Coverage Dashboard",d:"Sector, geography, adviser activity, IC conversion. Gap analysis for management.",s:"Auto-generated from pipeline data. Management view."},
+    {n:"Data Quality",d:"Ten daily checks on Salesforce data completeness and accuracy.",s:"Runs 07:00. Flags shown in Pipeline tab. Analyst reviews weekly."},
+    {n:"Agent Log",d:"Every action logged with methodology, tools used, time, and outcome.",s:"Write-once, immutable, 7-year retention. Operations and CEO access."}
+  ];
+  return`<div class="pt">Workflows</div><div class="ps">Every automation. What it does, how it runs, and who approves.</div>
+<div class="wg">${wfs.map(w=>`<div class="wc" style="background:var(--wh);border-radius:9px;padding:14px;border:1px solid var(--bd)"><strong style="font-size:13px;color:var(--nv);display:block;margin-bottom:4px">${w.n}</strong><p style="font-size:12px;color:var(--md);line-height:1.5;margin-bottom:7px">${w.d}</p><div style="font-size:11px;color:var(--lt);line-height:1.5">${w.s}</div></div>`).join("")}</div>`;
+}
+
+// ─── DASHBOARD ────────────────────────────────────────────────────────────────
+function renderHome(){
+  const my=D.filter(d=>d.as==="Analyst");
+  return`<div class="hero"><div class="hl">PE Growth | Deal Intelligence Platform</div>
+<div class="ht2">All workflows. One platform.<br>Human approval on every decision.</div>
+<div class="hss">Pipeline, one-pagers, research, portfolio screening, decision memory, relationship intelligence, fundraising, LP reporting.</div>
+<div class="hm">
+  <div><div class="hvv">${D.length}</div><div class="hmm">Pipeline</div></div>
+  <div><div class="hvv acc">${PF.length}</div><div class="hmm">Portfolio</div></div>
+  <div><div class="hvv acc">${D.filter(d=>d.stage==="Active").length}</div><div class="hmm">Active</div></div>
+  <div><div class="hvv">${my.length}</div><div class="hmm">Assigned to me</div></div>
+</div></div>
+${my.length?`<div class="cd" style="margin-bottom:13px;border-left:3px solid var(--ac)"><div class="cdt">Assigned to you <span class="pill ppn">${my.length}</span></div>${my.map(d=>`<div class="aq"><div class="aqi">${tb(d.tier)}</div><div><div class="aqt">${d.co}</div><div class="aqs">${d.sec} | ${d.nx}</div></div><div class="aqb"><button class="ab aby" onclick="go('intake')">One-pager</button><button class="qc" onclick="openD(${d.id})">Details</button></div></div>`).join("")}</div>`:""}
+<div class="dg">
+<div class="cd"><div class="cdt">Approval queue <span class="pill pw">3</span></div>
+  <div class="aq"><div class="aqi">&#9636;</div><div><div class="aqt">One-pager: Project Helios</div><div class="aqs">Approval A — content</div></div><div class="aqb"><button class="ab aby" onclick="la('Intake','Approval A approved','ok');this.parentNode.parentNode.style.opacity='.4'">Approve</button><button class="ab abn">Reject</button></div></div>
+  <div class="aq"><div class="aqi">&#9729;</div><div><div class="aqt">SF update: Nordtek</div><div class="aqs">Approval B — write to Salesforce</div></div><div class="aqb"><button class="ab aby" onclick="la('Intake','Approval B confirmed','ok');this.parentNode.parentNode.style.opacity='.4'">Confirm</button><button class="ab abn">Reject</button></div></div>
+  <div class="aq"><div class="aqi">&#9719;</div><div><div class="aqt">Memory entry: Urban Glide</div><div class="aqs">Confirm decline to memory</div></div><div class="aqb"><button class="ab aby" onclick="la('Memory','Entry confirmed','ok');this.parentNode.parentNode.style.opacity='.4'">Confirm</button><button class="ab abn">Reject</button></div></div>
+</div>
+<div>
+  <div class="cd" style="margin-bottom:11px"><div class="cdt">Agent activity</div>
+    ${aL.length===0?'<div style="font-size:12.5px;color:var(--lt)">Run a workflow to see activity.</div>':aL.slice(0,5).map(l=>`<div class="lgi"><div class="ld ${l.st==="ok"?"lok":"lpn"}"></div><div style="flex:1">${l.w}: ${l.s}</div><div style="color:var(--lt);font-size:11px">${l.t}</div></div>`).join("")}
+  </div>
+  <div class="cd"><div class="cdt">Events</div>
+    <div class="cdr" style="font-size:12px"><span style="width:62px;color:var(--md)">Tue 10</span><b>Industry Conference</b></div>
+    <div class="cdr" style="font-size:12px"><span style="width:62px;color:var(--md)">Thu 11</span>Team Afterwork</div>
+    <div class="cdr" style="font-size:12px"><span style="width:62px;color:var(--md)">Fri 12</span><b>CEO Review 11:00</b></div>
+  </div>
+</div>
+</div>`;
+}
+
+// ─── DEAL INTAKE AND ONE-PAGER ────────────────────────────────────────────────
+function renderIntake(){
+  const steps=["Teaser|Email","Extract|Fields","Memory|Check","Screen|5 criteria","Enrich|Sources","One-Pager|Draft","Salesforce|Propose"];
+  const icons=["&#9993;","&#9649;","&#9719;","&#10003;","&#9672;","&#9636;","&#9729;"];
+  return`<div class="pt">Deal Intake and One-Pager</div>
+<div class="ps">Seven-step pipeline. Approval A: review drafted one-pager content. Approval B: confirm Salesforce write, SharePoint folder creation, newsletter appendix, decision memory entry.</div>
+<div class="fd" id="flow">${steps.map((s,i)=>{const[t,u]=s.split("|");return`<div class="fs" id="fs${i}"><div class="fi">${icons[i]}</div><div class="ft">${t}</div><div class="fu">${u}</div></div>${i<6?'<div class="fa2">&#8594;</div>':''}`}).join("")}</div>
+<div class="lc"><div class="lct">Teaser</div>
+<textarea class="ta" id="tIn" rows="7">${TEASER}</textarea>
+<button class="br2" id="riB" onclick="runI()">Run full pipeline</button></div>
+<div id="iO"></div>`;
+}
+async function runI(){
+  const t=document.getElementById("tIn").value.trim();
+  if(!t||!ek())return;
+  const b=document.getElementById("riB");b.disabled=true;b.textContent="Running...";
+  const o=document.getElementById("iO");
+  o.innerHTML=`<div class="out" id="io"></div>`;
+  const io=document.getElementById("io");
+  for(let i=0;i<7;i++){
+    const el=document.getElementById("fs"+i);
+    if(el){el.classList.add("active");await new Promise(r=>setTimeout(r,350));el.classList.remove("active");el.classList.add("done");}
+  }
+  io.innerHTML=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Generating one-pager...</div>`;
+  try{
+    const r=await cc(`Process teaser. Return: 1. EXTRACTED FIELDS with confidence scores. 2. DECISION MEMORY CHECK (prior decisions). 3. FIVE-CRITERIA SCREEN (mandate fit, size, geography, sector, stage). 4. ONE-PAGER (Overview, Business, Financials, Fundraising, Shareholding, Recommendation). 5. SALESFORCE UPDATE PROPOSED (fields to write).\n\nTeaser: ${t}`);
+    io.innerHTML=fmt(r.text)+`<div style="margin-top:13px;display:flex;gap:7px;flex-wrap:wrap">
+<button class="br2" style="margin:0" onclick="la('Intake','Approval A: content approved','ok');this.textContent='Approved A';this.disabled=true;this.style.opacity='.6'">Approval A: Content</button>
+<button class="bs3" style="margin:0" onclick="la('Intake','Approval B: SF write confirmed','ok');this.textContent='Confirmed B';this.disabled=true;this.style.opacity='.6'">Approval B: Write to Salesforce</button>
+</div><div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s | ${r.tok} tokens</div>`;
+    la("Intake","One-pager generated","pn",r.time+"s");o.innerHTML+=fbr("int");
+  }catch(e){io.innerHTML=er(e);}
+  b.disabled=false;b.textContent="Run full pipeline";
+}
+
+// ─── PIPELINE AND DATA QUALITY ────────────────────────────────────────────────
+function renderPipeline(){
+  const q=st.q.toLowerCase();
+  const f=D.filter(d=>(d.co.toLowerCase().includes(q)||d.sec.toLowerCase().includes(q))&&(st.tier==="all"||d.tier===st.tier)&&(st.stage==="all"||d.stage===st.stage));
+  const chks=[
+    ["Missing opportunity fields",3,"am"],["Stale over 90 days",2,"am"],["Missing adviser",5,"am"],
+    ["Missing next step",4,"rd"],["Duplicate companies",1,"rd"],["Broken SharePoint links",2,"am"],
+    ["Missing investment memo",3,"am"],["Missing deal folder",2,"rd"],["Missing screening outcome",6,"rd"]
+  ];
+  return`<div class="pt">Pipeline and Data Quality</div><div class="ps">Dealflow with inline Salesforce health. Click any row for full details.</div>
+<div class="tabs">
+  <div class="tab ${st.pTab!=="dq"&&st.pTab!=="my"?"on":""}" onclick="st.pTab='pipe';render()">Pipeline</div>
+  <div class="tab ${st.pTab==="my"?"on":""}" onclick="st.pTab='my';render()">My Pipeline</div>
+  <div class="tab ${st.pTab==="dq"?"on":""}" onclick="st.pTab='dq';render()">Data Quality</div>
+</div>
+${st.pTab==="dq"?`
+<div class="sr">
+  <div class="sc" style="border-color:var(--rd)"><div class="sv">${chks.filter(c=>c[2]==="rd").reduce((a,c)=>a+c[1],0)}</div><div class="sl2">Critical</div></div>
+  <div class="sc" style="border-color:var(--am)"><div class="sv">${chks.filter(c=>c[2]==="am").reduce((a,c)=>a+c[1],0)}</div><div class="sl2">Warnings</div></div>
+</div>
+<div class="tc"><table><thead><tr><th>Check</th><th>Issues</th><th>Severity</th></tr></thead><tbody>
+${chks.map(c=>`<tr><td>${c[0]}</td><td style="font-weight:700;color:var(--${c[2]})">${c[1]}</td><td><span class="pill ${c[2]==="rd"?"prd":"pw"}">${c[2]==="rd"?"Critical":"Warning"}</span></td></tr>`).join("")}
+</tbody></table></div>`
+:st.pTab==="my"?`
+<div class="tc"><table><thead><tr><th>Tier</th><th>Stage</th><th>Company</th><th>Sector</th><th>Next step</th><th>Status</th><th></th></tr></thead><tbody>
+${D.filter(d=>d.as==="Analyst").map(d=>`<tr><td>${tb(d.tier)}</td><td>${sg2(d.stage)}</td><td class="cn">${d.co}</td><td class="m">${d.sec}</td><td>${d.nx}</td><td>${ss2(d.s)}</td><td><button class="qc" onclick="go('intake')">One-pager</button></td></tr>`).join("")}
+</tbody></table></div>`
+:`<div class="sr">
+  <div class="sc" style="border-color:#1a2744"><div class="sv">${D.length}</div><div class="sl2">Total</div></div>
+  <div class="sc" style="border-color:var(--gn)"><div class="sv">${D.filter(d=>d.s==="si").length}</div><div class="sl2">Sweet spot</div></div>
+  <div class="sc" style="border-color:var(--ac)"><div class="sv">${D.filter(d=>d.stage==="Active").length}</div><div class="sl2">Active</div></div>
+</div>
+<div class="fr2"><span class="fll">Tier</span>${["all","0","S","1","2"].map(t=>`<button class="fbt ${st.tier===t?"on":""}" onclick="st.tier='${t}';render()">${t==="all"?"All":t}</button>`).join("")}<span class="fll" style="margin-left:7px">Stage</span>${["all","Active","Standby","Classify"].map(s=>`<button class="fbt ${st.stage===s?"on":""}" onclick="st.stage='${s}';render()">${s==="all"?"All":s}</button>`).join("")}</div>
+<div class="tc"><table><thead><tr><th>Tier</th><th>Stage</th><th>Company</th><th>Country</th><th>Sector</th><th>Lead</th><th>Assigned</th><th>Next step</th><th>Status</th><th></th></tr></thead><tbody>
+${f.map(d=>`<tr><td>${tb(d.tier)}</td><td>${sg2(d.stage)}</td><td class="cn">${d.co}</td><td class="m">${d.cn}</td><td class="m">${d.sec}</td><td class="m">${d.ld}</td><td class="m" style="font-size:11.5px">${d.as}</td><td>${d.nx}</td><td>${ss2(d.s)}</td><td><button class="qc" onclick="openD(${d.id})">Open</button></td></tr>`).join("")}
+</tbody></table><div class="tf">${f.length} of ${D.length}</div></div>`}`;
+}
+
+// ─── NEWSLETTER ───────────────────────────────────────────────────────────────
+function renderNewsletter(){
+  const issues=["Sep 7th 2026","Sep 1st 2026","Aug 24th 2026","Aug 3rd 2026","Jul 27th 2026","Jul 20th 2026","Jul 13th 2026","Jul 6th 2026","Jun 29th 2026","Jun 22nd 2026"];
+  return`<div class="pt">Newsletter</div><div class="ps">Pipeline pulled, calendar scanned, news gathered, formatted to house template. Lead Partner reviews and publishes to SharePoint.</div>
+<div class="lc" style="border-left:3px solid var(--ac)"><div class="cdt" style="margin-bottom:7px">Latest draft <span class="pill pw">Pending review</span></div>
+<div style="font-size:12.5px;color:var(--md);margin-bottom:9px">Week of September 14th 2026</div>
+<div style="display:flex;gap:7px;flex-wrap:wrap">
+<button class="br2" style="margin:0" onclick="runNL()">Generate now</button>
+<button class="bg2" style="margin:0" onclick="document.getElementById('nlG').style.display=document.getElementById('nlG').style.display==='none'?'block':'none'">Format and guidelines</button>
+</div>
+<div id="nlG" style="display:none;margin-top:13px;padding:13px;background:#f8fafc;border-radius:7px;border:1px solid var(--bd);font-size:12px;line-height:1.7;color:var(--md)">
+<b style="color:var(--nv);display:block;margin-bottom:7px">Format and guidelines</b>
+<b>Section 1: Deals of the Week</b><br>Company, Country, Description, Round, Amount, Investors. Skip deals under EUR 2m.<br><br>
+<b>Section 2: Dealflow Review</b><br>Full pipeline by tier. Preserve next steps exactly as written in Salesforce.<br><br>
+<b>Section 3: Events</b><br>Calendar scan. Conferences flagged. Team events included.<br><br>
+<b>Section 4: Market Intelligence</b><br>One EU macro story. Factual, 2-3 sentences. No opinion.<br><br>
+<b>Section 5: Appendix</b><br>Golden template per new deal: Overview, Business, Financials, Fundraising, Shareholding, Recommendation. Recommendation = actions and open questions only. Never use: "positioned to benefit", "strong tailwinds", "compelling case", "European champion".<br><br>
+<b>Closing:</b> Have a good week!
+</div></div>
+<div class="lc"><div class="lct">Last 10 published issues</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Week</th><th>Status</th><th></th></tr></thead><tbody>
+${issues.map(i=>`<tr><td class="cn">Week of ${i}</td><td><span class="pill pg">Published</span></td><td><a href="#" style="color:var(--bl);font-size:12px;text-decoration:none">View &#8599;</a></td></tr>`).join("")}
+</tbody></table></div></div><div id="nlO"></div>`;
+}
+async function runNL(){
+  if(!ek())return;
+  const o=document.getElementById("nlO");
+  o.innerHTML=`<div class="out" id="no"></div>`;
+  const no=document.getElementById("no");
+  await scn(no,["Salesforce","Calendars","FT Climate","Market news"]);
+  no.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Drafting newsletter...</div>`;
+  const pl=D.map(d=>`${d.co} (${d.sec}, tier ${d.tier}, ${d.nx})`).join("; ");
+  try{
+    const r=await cc(`Weekly newsletter for Sep 14th 2026. Pipeline: ${pl}. Structure: Deals of the Week (3), Dealflow Review (by tier), Events, Market Intelligence, Have a good week!`);
+    no.innerHTML=fmt(r.text)+`<div style="margin-top:13px"><button class="br2" style="margin:0" onclick="la('Newsletter','Published to SharePoint','ok');this.textContent='Published';this.disabled=true">Approve and publish</button></div><div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s</div>`;
+    la("Newsletter","Draft generated","pn",r.time+"s");o.innerHTML+=fbr("nl");
+  }catch(e){no.innerHTML=er(e);}
+}
+
+// ─── DECISION MEMORY ──────────────────────────────────────────────────────────
+function renderMemory(){
+  const srcTypes=["all","One-pager","Screening","Forum discussion","Pipeline update","IC materials","LP Report context","Relationship interaction"];
+  const shown=st.memSrc==="all"?MM:MM.filter(m=>m.src===st.memSrc);
+  return`<div class="pt">Decision Memory</div>
+<div class="ps">Fed by all approved knowledge: screening outputs, one-pagers, pipeline updates, forum discussions, IC materials, LP reports, relationship interactions. Every entry shows its source type.</div>
+<div class="lc" style="margin-bottom:13px"><div class="lct">Search</div>
+<input class="inp" id="mN" placeholder="Company name or keyword">
+<button class="br2" onclick="runM()">Search memory</button>
+<div id="mO"></div></div>
+<div class="sr">
+  <div class="sc" style="border-color:var(--nv)"><div class="sv">47</div><div class="sl2">In memory</div></div>
+  <div class="sc" style="border-color:var(--rd)"><div class="sv">31</div><div class="sl2">Declined</div></div>
+  <div class="sc" style="border-color:var(--am)"><div class="sv">12</div><div class="sl2">Pass</div></div>
+  <div class="sc" style="border-color:var(--bl)"><div class="sv">4</div><div class="sl2">Monitored</div></div>
+</div>
+<div class="fr2"><span class="fll">Source</span>${srcTypes.map(s=>`<button class="fbt ${st.memSrc===s?"on":""}" onclick="st.memSrc='${s}';render()">${s==="all"?"All":s}</button>`).join("")}</div>
+<div class="tc"><table><thead><tr><th>Company</th><th>Date</th><th>Reviewer</th><th>Decision</th><th>Source</th><th>Reason</th></tr></thead><tbody>
+${shown.map(m=>`<tr><td class="cn">${m.co}</td><td class="m">${m.dt}</td><td class="m">${m.rv}</td><td><span class="pill ${m.dc==="Pass"?"pw":"pp"}">${m.dc}</span></td><td class="m" style="font-size:11px"><span style="background:#f0f3f9;padding:2px 6px;border-radius:4px">${m.src}</span></td><td style="font-size:12px;color:var(--md)">${m.rs}</td></tr>`).join("")}
+</tbody></table><div class="tf">${shown.length} of 47</div></div>`;
+}
+async function runM(){
+  const n=document.getElementById("mN").value.trim();
+  if(!n||!ek())return;
+  const o=document.getElementById("mO");
+  o.innerHTML=`<div class="out" id="mo"><div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Searching memory...</div></div>`;
+  const kn=MM.map(m=>`${m.co}: ${m.dc} (${m.dt}, ${m.rv}, via ${m.src}): ${m.rs}`).join("\n");
+  try{
+    const r=await cc(`Search decision memory for "${n}". Known entries: ${kn}. Return prior decision with reviewer, date, source type, and reasoning. If not found, confirm as new and check for similar companies.`);
+    document.getElementById("mo").innerHTML=fmt(r.text);la("Memory","Search: "+n,"ok");
+  }catch(e){document.getElementById("mo").innerHTML=er(e);}
+}
+
+// ─── RESEARCH HUB ─────────────────────────────────────────────────────────────
+function renderResearch(){
+  const sg=[
+    "European SMEs, low-carbon cement, under EUR 30m, bootstrapped",
+    "French battery recycling, founder-exit opportunity",
+    "Comparable set for strategic metals recycling in Europe",
+    "European EV charging value chain, acquisition targets",
+    "EU regulatory developments, grid infrastructure, 2026"
+  ];
+  return`<div style="text-align:center;padding:28px 18px 18px">
+<h1 style="font-size:23px;font-weight:800;color:var(--nv);margin-bottom:6px">Research Hub</h1>
+<p style="font-size:12.5px;color:var(--md);max-width:500px;margin:0 auto;line-height:1.6">Screen markets, build comparables, map value chains across all sources.</p>
+</div>
+<div class="riw"><textarea class="rta" id="rta" placeholder="e.g. Find European energy management companies, EUR 5m to 50m revenue..." rows="2"></textarea><button class="rsb" onclick="doRes()">&#8593;</button></div>
+<div style="max-width:700px;margin:11px auto 0">
+${sg.map(s=>`<div style="background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:9px 13px;margin-bottom:4px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:7px" onclick="document.getElementById('rta').value='${s}'"><span style="color:var(--ac);font-weight:700">+</span>${s}</div>`).join("")}
+</div>
+<div style="max-width:700px;margin:13px auto;display:flex;gap:5px;flex-wrap:wrap;justify-content:center">
+${[["AlphaSense","w"],["PitchBook","w"],["Capital IQ","w"],["Pappers","w"],["Web","l"]].map(([n,s])=>`<span class="chip"><span class="dot d${s}"></span>${n}</span>`).join("")}
+</div>
+<div id="rO"></div>`;
+}
+async function doRes(){
+  const q=document.getElementById("rta").value.trim();
+  if(!q||!ek())return;
+  const o=document.getElementById("rO");
+  o.innerHTML=`<div class="out" id="ro"></div>`;
+  const ro=document.getElementById("ro");
+  await scn(ro,["AlphaSense","PitchBook","Capital IQ","Pappers","Web"]);
+  ro.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Analysing...</div>`;
+  try{
+    const r=await cc(`Research: ${q}. Return structured findings with companies, financials, thesis fit, and next steps.`);
+    ro.innerHTML=fmt(r.text)+`<div style="margin-top:9px;font-size:11px;color:var(--lt)">${r.time}s | ${r.tok} tokens</div>`;
+    la("Research",q.slice(0,50),"ok",r.time+"s");o.innerHTML+=fbr("res");
+  }catch(e){ro.innerHTML=er(e);}
+}
+
+// ─── RELATIONSHIP INTELLIGENCE ────────────────────────────────────────────────
+function renderRl(){
+  const subTabs=["bankers","lps","portfolio"];
+  const data={bankers:BK,lps:LP2.map(l=>({n:l.n,f:l.o,e:l.e,t:l.t,sc:l.g,la:l.la,ops:"-",adv:"-",ls:"LP interaction",nxt:"Follow-up",sg:l.sg,st:l.st})),portfolio:[]};
+  const rows=data[st.rlTab]||[];
+  return`<div class="pt">Relationship Intelligence</div>
+<div class="ps">Timeline for every contact before any action. Detects relationship stage. Generates personalised drafts. Never sends automatically.</div>
+<div class="lc" style="margin-bottom:13px"><div class="lct">Describe your scenario</div>
+<textarea class="ta" id="rlS" placeholder="e.g. Met the Goldman energy banker at the conference Tuesday. He mentioned a French BESS company raising EUR 20m. We had a good conversation but have not followed up. Draft a personalised outreach." rows="4"></textarea>
+<div style="display:flex;gap:7px;margin-top:7px;flex-wrap:wrap">
+<select class="inp" id="rlT" style="padding:8px;margin:0;flex:1">
+  <option value="auto">Auto-detect action</option>
+  <option value="timeline">Relationship timeline</option>
+  <option value="meeting">Meeting brief</option>
+  <option value="followup">Follow-up draft</option>
+  <option value="intro">First contact</option>
+  <option value="reachout">Stage-aware reachout</option>
+</select>
+<button class="br2" style="margin:0" onclick="runRl()">Generate</button>
+</div></div>
+<div class="lc">
+<div class="tabs" style="margin-bottom:11px">
+  ${subTabs.map(t=>`<div class="tab ${st.rlTab===t?"on":""}" onclick="st.rlTab='${t}';render()" style="font-size:12px">${t.charAt(0).toUpperCase()+t.slice(1)}</div>`).join("")}
+</div>
+${st.rlTab==="portfolio"?`<div style="font-size:12.5px;color:var(--md)">Portfolio ecosystem contacts shown here once companies are added.</div>`:
+`<div style="display:flex;gap:7px;margin-bottom:9px"><input class="inp" id="rlSr" placeholder="Search..." style="margin:0;flex:1" oninput="rlFl(this.value)"></div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Name</th><th>Firm</th><th>Type</th><th>Sector</th><th>Last contact</th><th>Prior deals</th><th>Advances</th><th>Latest topic</th><th>Stage</th><th>Next action</th><th></th></tr></thead><tbody id="rlTb">
+${rows.map((b,i)=>`<tr id="rlr${i}"><td class="cn">${b.n}</td><td class="m">${b.f}</td><td class="m">${b.t}</td><td class="m">${b.sc}</td><td class="m">${b.la}</td><td style="text-align:center">${b.ops}</td><td style="text-align:center">${b.adv}</td><td class="m" style="font-size:11.5px">${b.ls||""}</td><td><span class="pill ${b.st}" id="rlst${i}">${b.sg}</span></td><td style="font-size:11.5px;color:var(--md)">${b.nxt||""}</td><td><button class="qc" onclick="rlSel('${b.n}','${b.f}')">Draft</button></td></tr>`).join("")}
+</tbody></table></div>`}
+</div>
+<div id="rlO"></div>`;
+}
+function rlFl(q){document.querySelectorAll("#rlTb tr").forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?"":"none";});}
+function rlSel(n,f){document.getElementById("rlS").value=`Follow up with ${n} at ${f}. Draft a personalised outreach based on relationship history and latest topics discussed.`;document.getElementById("rlT").value="followup";}
+async function runRl(){
+  const s=document.getElementById("rlS").value.trim();
+  const t=document.getElementById("rlT").value;
+  if(!s||!ek())return;
+  const o=document.getElementById("rlO");
+  o.innerHTML=`<div class="out" id="rlo"></div>`;
+  const rlo=document.getElementById("rlo");
+  await scn(rlo,["Email history","Salesforce","SharePoint","Calendar"]);
+  rlo.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Analysing scenario...</div>`;
+  try{
+    const r=await cc(`Relationship intelligence. Scenario: ${s}\nAction: ${t==="auto"?"Auto-detect":t}\n\nReturn:\n### Relationship timeline\n### ${t==="timeline"?"Recommendation":"Draft"}\n### Next steps`);
+    rlo.innerHTML=fmt(r.text)+`<div style="margin-top:11px"><button class="br2" style="margin:0" onclick="la('Relationship','Draft placed unsent','ok');alert('Draft placed unsent in email client.')">Place in drafts (unsent)</button></div><div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s</div>`;
+    la("Relationship",s.slice(0,50),"ok",r.time+"s");o.innerHTML+=fbr("rl");
+  }catch(e){rlo.innerHTML=er(e);}
+}
+
+// ─── FUNDRAISING INTELLIGENCE ─────────────────────────────────────────────────
+function renderFi(){
+  const fiTabs=["lp","active","ddq","briefings","pipeline"];
+  const tabLabels={lp:"Prospective LPs",active:"Active LPs",ddq:"DDQ Tracker",briefings:"Meeting Briefings",pipeline:"Commitment Pipeline"};
+  return`<div class="pt">Fundraising Intelligence</div>
+<div class="ps">Full LP relationship management. Prospective and active LPs, DDQ tracker, meeting briefings, follow-up drafts, commitment pipeline.</div>
+<div class="tabs">${fiTabs.map(t=>`<div class="tab ${st.fiTab===t?"on":""}" onclick="st.fiTab='${t}';render()">${tabLabels[t]}</div>`).join("")}</div>
+${renderFiTab()}`;
+}
+function renderFiTab(){
+  if(st.fiTab==="lp"){
+    return`<div class="sr">
+<div class="sc" style="border-color:var(--ac)"><div class="sv">${LP2.length}</div><div class="sl2">LP contacts</div></div>
+<div class="sc" style="border-color:var(--gn)"><div class="sv">1</div><div class="sl2">Committed</div></div>
+<div class="sc" style="border-color:var(--am)"><div class="sv">2</div><div class="sl2">DDQ / Active</div></div>
+<div class="sc" style="border-color:var(--bl)"><div class="sv">65%</div><div class="sl2">Fund target</div></div>
+</div>
+<div class="lc"><div class="lct">Prospective LP table</div>
+<div style="display:flex;gap:7px;margin-bottom:9px"><input class="inp" id="fiSr" placeholder="Search LPs..." style="margin:0;flex:1" oninput="fiSearchLp(this.value)"></div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Name</th><th>Organisation</th><th>Type</th><th>Geography</th><th>Ticket</th><th>Last contact</th><th>Stage</th><th>Action</th></tr></thead><tbody id="fiTb">
+${LP2.map((l,i)=>`<tr><td class="cn">${l.n}</td><td class="m">${l.o}</td><td class="m">${l.t}</td><td class="m">${l.g}</td><td style="font-weight:600">${l.tk}</td><td class="m">${l.la}</td><td><span class="pill ${l.st}" id="fist${i}">${l.sg}</span></td><td><button class="qc" onclick="fiSelBrief('${l.n}','${l.o}')">Brief</button></td></tr>`).join("")}
+</tbody></table></div></div>`;
+  }
+  if(st.fiTab==="active"){
+    const active=LP2.filter(l=>["Committed","DDQ stage","Active"].includes(l.sg));
+    return`<div class="lc"><div class="lct">Active LPs — open follow-ups</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Name</th><th>Organisation</th><th>Stage</th><th>Last contact</th><th>Next milestone</th></tr></thead><tbody>
+${active.map(l=>`<tr><td class="cn">${l.n}</td><td class="m">${l.o}</td><td><span class="pill ${l.st}">${l.sg}</span></td><td class="m">${l.la}</td><td style="font-size:12px">${l.sg==="Committed"?"Monitor quarterly":"Next interaction scheduled"}</td></tr>`).join("")}
+</tbody></table></div></div>
+<div class="lc"><div class="lct">Investor Memory</div>
+${active.map(l=>`<div class="lr"><span class="ck">&#10003;</span><span><b>${l.n} (${l.o})</b> — Ticket: ${l.tk}, Geography focus: ${l.g}. Prior questions: impact methodology, portfolio concentration.</span></div>`).join("")}
+</div>`;
+  }
+  if(st.fiTab==="ddq"){
+    return`<div class="lc"><div class="lct">DDQ requests</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>LP</th><th>Question / Topic</th><th>Due date</th><th>Status</th><th>Action</th></tr></thead><tbody>
+${DDQ.map(d=>`<tr><td class="cn">${d.lp}</td><td>${d.q}</td><td class="m">${d.due}</td><td><span class="pill ${d.st2}">${d.st}</span></td><td><button class="qc" onclick="fiDDQ('${d.lp}','${d.q}')">Draft response</button></td></tr>`).join("")}
+</tbody></table></div></div>
+<div id="ddqO"></div>`;
+  }
+  if(st.fiTab==="briefings"){
+    return`<div class="lc"><div class="lct">Generate meeting brief</div>
+<input class="inp" id="fiLpN" placeholder="LP name or organisation">
+<textarea class="ta" id="fiLpCtx" placeholder="Context: upcoming meeting agenda, known questions, portfolio relevance..." rows="3"></textarea>
+<div style="display:flex;gap:7px;flex-wrap:wrap">
+<button class="br2" onclick="fiRunBrief()">Generate brief</button>
+<button class="bg2" onclick="fiRunFollowup()">Generate follow-up draft</button>
+</div></div>
+<div id="fiO"></div>`;
+  }
+  if(st.fiTab==="pipeline"){
+    const committed=LP2.filter(l=>l.sg==="Committed").reduce((a,l)=>{const v=parseFloat(l.tk.replace("EUR ","").replace("m",""));return a+v;},0);
+    const pipeline=LP2.filter(l=>["DDQ stage","Active"].includes(l.sg)).reduce((a,l)=>{const v=parseFloat(l.tk.replace("EUR ","").replace("m",""));return a+v;},0);
+    return`<div class="sr">
+<div class="sc" style="border-color:var(--nv)"><div class="sv">EUR 150m</div><div class="sl2">Fund target</div></div>
+<div class="sc" style="border-color:var(--gn)"><div class="sv">EUR ${committed}m</div><div class="sl2">Committed</div></div>
+<div class="sc" style="border-color:var(--am)"><div class="sv">EUR ${pipeline}m</div><div class="sl2">In pipeline</div></div>
+<div class="sc" style="border-color:var(--bl)"><div class="sv">${Math.round(committed/150*100)}%</div><div class="sl2">Of target</div></div>
+</div>
+<div class="lc"><div class="lct">Commitment pipeline by LP</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>LP</th><th>Type</th><th>Ticket size</th><th>Stage</th><th>Probability</th></tr></thead><tbody>
+${LP2.map(l=>`<tr><td class="cn">${l.o}</td><td class="m">${l.t}</td><td style="font-weight:600">${l.tk}</td><td><span class="pill ${l.st}">${l.sg}</span></td><td class="m">${{Committed:"100%","DDQ stage":"60%","Active":"30%","First contact":"10%","Cooling":"5%"}[l.sg]||"—"}</td></tr>`).join("")}
+</tbody></table></div></div>`;
+  }
+  return "";
+}
+function fiSearchLp(q){document.querySelectorAll("#fiTb tr").forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?"":"none";});}
+function fiSelBrief(n,o){st.fiTab="briefings";render();setTimeout(()=>{document.getElementById("fiLpN").value=n+" ("+o+")";},50);}
+function fiDDQ(lp,q){
+  if(!ek())return;
+  const o=document.getElementById("ddqO");
+  o.innerHTML=`<div class="out" id="ddqo"><div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Drafting DDQ response...</div></div>`;
+  cc(`Draft a precise DDQ response for ${lp}. Question: "${q}". Return a concise, factual PE fund response with supporting data.`).then(r=>{
+    document.getElementById("ddqo").innerHTML=fmt(r.text);la("Fundraising","DDQ draft: "+lp,"ok");
+  }).catch(e=>{document.getElementById("ddqo").innerHTML=er(e);});
+}
+async function fiRunBrief(){
+  const n=document.getElementById("fiLpN").value.trim();
+  const ctx=document.getElementById("fiLpCtx").value.trim();
+  if(!n||!ek())return;
+  const o=document.getElementById("fiO");
+  o.innerHTML=`<div class="out" id="fio"></div>`;
+  const fio=document.getElementById("fio");
+  await scn(fio,["Investor memory","Prior meetings","Portfolio updates","DDQ history"]);
+  fio.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Building brief...</div>`;
+  try{
+    const r=await cc(`Meeting brief for ${n}. ${ctx}. Return: Investor profile summary, Prior interactions summary, Portfolio relevance, Likely questions, Recommended talking points, Next steps.`);
+    fio.innerHTML=fmt(r.text)+`<div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s</div>`;
+    la("Fundraising","Brief: "+n,"ok",r.time+"s");o.innerHTML+=fbr("fi");
+  }catch(e){fio.innerHTML=er(e);}
+}
+async function fiRunFollowup(){
+  const n=document.getElementById("fiLpN").value.trim();
+  const ctx=document.getElementById("fiLpCtx").value.trim();
+  if(!n||!ek())return;
+  const o=document.getElementById("fiO");
+  o.innerHTML=`<div class="out" id="fio"></div>`;
+  const fio=document.getElementById("fio");
+  await scn(fio,["Email history","Meeting notes","Commitments tracker"]);
+  fio.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Drafting follow-up...</div>`;
+  try{
+    const r=await cc(`Post-meeting follow-up draft for ${n}. Context: ${ctx}. Return a concise, professional email draft. Factual, no marketing language.`);
+    fio.innerHTML=fmt(r.text)+`<div style="margin-top:11px"><button class="br2" style="margin:0" onclick="la('Fundraising','Draft placed unsent','ok');alert('Placed unsent in email client.')">Place in drafts (unsent)</button></div><div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s</div>`;
+    la("Fundraising","Follow-up: "+n,"ok",r.time+"s");o.innerHTML+=fbr("fi2");
+  }catch(e){fio.innerHTML=er(e);}
+}
+
+// ─── PORTFOLIO VALUE CREATION ─────────────────────────────────────────────────
+function renderPvc(){
+  return`<div class="pt">Portfolio Value Creation</div>
+<div class="ps">Select a portfolio company. Four search modes: Acquisition Targets, Commercial Partners, Suppliers, Geographic Expansion. Each returns structured PE-language comparables.</div>
+<div class="wg">${PF.map((p,i)=>`<div class="pfc" onclick="selPf(${i})"><strong>${p.c}</strong><div class="ps2">${p.sc} | ${p.inv}</div><div class="pm"><span>Invested: <b>&#8364;${p.am}</b></span><span>MOIC: <b>${p.mo}</b></span></div><div class="pm"><span>Rev: <b>&#8364;${p.rv}</b></span><span>EBITDA: <b>&#8364;${p.eb}</b></span></div></div>`).join("")}</div>
+<div class="lc"><div class="lct">Search</div>
+<input class="inp" id="pvQ" placeholder="Select a company above, or type your own query">
+<div style="display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap">
+  ${["Acquisition Targets","Commercial Partners","Suppliers","Geographic Expansion"].map(m=>`<button class="fbt" onclick="setPvMode('${m}')">${m}</button>`).join("")}
+</div>
+<button class="br2" onclick="runPV()">Search</button>
+</div><div id="pvO"></div>`;
+}
+function selPf(i){const p=PF[i];document.getElementById("pvQ").value=`Find acquisition targets for ${p.c} (${p.d}) in ${p.sc} and adjacent sectors. European focus. EUR 5m to 50m revenue.`;}
+function setPvMode(m){const q=document.getElementById("pvQ");if(q.value&&q.value.includes("Find ")){q.value=q.value.replace(/^Find [^\s]+/,`Find ${m.toLowerCase().replace(" ","_")}`);}else{q.value=`Find ${m.toLowerCase()} for selected portfolio company in European markets.`;}}
+async function runPV(){
+  const q=document.getElementById("pvQ").value.trim();
+  if(!q||!ek())return;
+  const o=document.getElementById("pvO");
+  o.innerHTML=`<div class="out" id="pvo"></div>`;
+  const pvo=document.getElementById("pvo");
+  await scn(pvo,["Portfolio profiles","PitchBook","Market signals","Value chain data"]);
+  pvo.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;color:var(--md)"><span class="spn"></span>Building comparables...</div>`;
+  try{
+    const r=await cc(`${q}\nReturn: Direction rationale, Comparables table (Company | Country | Revenue | Ownership | Synergy rationale | Notes, 5-8 rows), Market signals, Next steps.`);
+    pvo.innerHTML=fmt(r.text)+`<div style="margin-top:9px;font-size:11px;color:var(--lt)">${r.time}s | ${r.tok} tokens</div>`;
+    la("PVC",q.slice(0,50),"ok",r.time+"s");o.innerHTML+=fbr("pv");
+  }catch(e){pvo.innerHTML=er(e);}
+}
+
+// ─── LP REPORTING ─────────────────────────────────────────────────────────────
+function renderLp(){
+  const rps={
+    quarterly:["Q3 2026","Q2 2026","Q1 2026","Q4 2025","Q3 2025","Q2 2025","Q1 2025","Q4 2024","Q3 2024","Q2 2024"],
+    monthly:["Aug 2026","Jul 2026","Jun 2026","May 2026","Apr 2026","Mar 2026","Feb 2026","Jan 2026","Dec 2025","Nov 2025"],
+    annual:["2025","2024","2023","2022"],
+    specific:["Nordic PF Q2 2026","Alpine Re Q1 2026","Iberian FoF Q2 2026","Nordic PF Q1 2026","Atlantic Q4 2025","CDC Q2 2026","Alpine Re Q4 2025","Nordic PF Q4 2025","Iberian FoF Q1 2026","Generali Q2 2026"]
+  };
+  const cur=rps[st.lpTab]||rps.quarterly;
+  return`<div class="pt">LP Reporting</div>
+<div class="ps">Four report types. Three structured sections per report. CEO reviews every report before any LP sees it.</div>
+<div class="tabs">
+  <div class="tab ${st.lpTab==="quarterly"?"on":""}" onclick="st.lpTab='quarterly';render()">Quarterly</div>
+  <div class="tab ${st.lpTab==="monthly"?"on":""}" onclick="st.lpTab='monthly';render()">Monthly</div>
+  <div class="tab ${st.lpTab==="annual"?"on":""}" onclick="st.lpTab='annual';render()">Annual</div>
+  <div class="tab ${st.lpTab==="specific"?"on":""}" onclick="st.lpTab='specific';render()">LP-specific</div>
+</div>
+${st.lpTab==="specific"?`<div class="lc"><div class="lct">Select LP</div><input class="inp" id="lpN" placeholder="LP name or organisation"><button class="br2" onclick="runLp2()">Generate LP-specific report</button></div>`:`<div class="lc"><button class="br2" onclick="runLp2()">Generate ${st.lpTab} report</button></div>`}
+<div class="sp3">
+<div class="lc"><div class="lct">A. Investment Activity</div>
+<div class="lr"><span class="ck">&#10003;</span>New investments this period</div>
+<div class="lr"><span class="ck">&#10003;</span>Re-ups and follow-ons</div>
+<div class="lr"><span class="ck">&#10003;</span>Exclusivities entered</div>
+<div class="lr"><span class="ck">&#10003;</span>Exits and realisations</div>
+<div class="lr"><span class="ck">&#10003;</span>Pipeline commentary</div>
+</div>
+<div class="lc"><div class="lct">B. Portfolio Performance</div>
+<div class="lr"><span class="ck">&#10003;</span>Revenue per company</div>
+<div class="lr"><span class="ck">&#10003;</span>EBITDA per company</div>
+<div class="lr"><span class="ck">&#10003;</span>Growth and MOIC</div>
+<div class="lr"><span class="ck">&#10003;</span>Key update and action plan</div>
+<div class="lr"><span class="ck">&#10003;</span>Fund-level KPIs</div>
+</div>
+<div class="lc"><div class="lct">C. Impact Dashboard</div>
+<div class="lr"><span class="ck">&#10003;</span>Fund-level: emissions avoided</div>
+<div class="lr"><span class="ck">&#10003;</span>Portfolio-level: jobs created</div>
+<div class="lr"><span class="ck">&#10003;</span>Company-level: ESG metrics</div>
+<div class="lr"><span class="ck">&#10003;</span>SDG alignment per company</div>
+<div class="lr"><span class="ck">&#10003;</span>Impact score progression</div>
+</div>
+</div>
+<div class="lc"><div class="lct">Last 10 ${st.lpTab} reports</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Report</th><th>Status</th><th></th></tr></thead><tbody>
+${cur.map(r=>`<tr><td class="cn">${st.lpTab==="specific"?r:st.lpTab.charAt(0).toUpperCase()+st.lpTab.slice(1)+" "+r}</td><td><span class="pill pg">Published</span></td><td><a href="#" style="color:var(--bl);font-size:12px;text-decoration:none">View &#8599;</a></td></tr>`).join("")}
+</tbody></table></div></div>
+<div id="lpO"></div>`;
+}
+async function runLp2(){
+  if(!ek())return;
+  const o=document.getElementById("lpO");
+  o.innerHTML=`<div class="out" id="lpo"></div>`;
+  const lpo=document.getElementById("lpo");
+  await scn(lpo,["Salesforce","Portfolio","Approved filings","Report template"]);
+  const pl=PF.map(p=>`${p.c} (${p.sc}, MOIC ${p.mo}, Rev EUR${p.rv}, EBITDA EUR${p.eb})`).join("; ");
+  const lpN=st.lpTab==="specific"?document.getElementById("lpN")?.value||"":"";
+  try{
+    const r=await cc(`Generate PE Growth ${st.lpTab} LP report${lpN?" for "+lpN:""}. Portfolio: ${pl}.\nReturn:\n### A. Investment Activity\n### B. Portfolio Performance\n### C. Impact Dashboard\n### Outlook`);
+    lpo.innerHTML=fmt(r.text)+`<div style="margin-top:13px"><button class="br2" style="margin:0" onclick="la('LP','Sent for CEO review','pn');this.textContent='Sent for review';this.disabled=true">Send for CEO review</button></div><div style="margin-top:7px;font-size:11px;color:var(--lt)">${r.time}s</div>`;
+    la("LP",st.lpTab+" report generated","pn",r.time+"s");o.innerHTML+=fbr("lp");
+  }catch(e){lpo.innerHTML=er(e);}
+}
+
+// ─── COVERAGE DASHBOARD ───────────────────────────────────────────────────────
+function renderCoverage(){
+  const sc=[["Energy Transition",34],["Recycling and Waste",22],["Sustainable Transport",18],["Water and Environment",9],["Digital Infrastructure",6],["Social Infrastructure",3]];
+  const geo=[["France",38],["Germany",14],["UK",12],["Nordics",8],["Benelux",6],["Southern Europe",4]];
+  const advisers=[["A. Morrison (Goldman Sachs)","Energy","3 deals","1 one-pager"],["H. Dupont (Oakley)","Waste, Energy","4 deals","2 one-pagers"],["S. Weber (Societe Generale)","Energy Transition","4 deals","2 one-pagers"],["M. Petit (Alantra)","Recycling","3 deals","1 one-pager"],["L. Becker (Lazard)","Infrastructure","5 deals","2 one-pagers"]];
+  return`<div class="pt">Coverage Dashboard</div><div class="ps">Opportunities by sector, geography, adviser activity, IC conversion. Management view. Shows where coverage is thin.</div>
+<div class="sp2">
+<div class="lc"><div class="lct">By sector</div>
+${sc.map(([n,v])=>`<div style="margin:6px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${n}</span><span style="color:var(--md)">${v}</span></div><div class="barw"><div class="bar" style="width:${v/34*100}%"></div></div></div>`).join("")}
+</div>
+<div class="lc"><div class="lct">By geography</div>
+${geo.map(([n,v])=>`<div style="margin:6px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${n}</span><span style="color:var(--md)">${v}</span></div><div class="barw"><div class="bar" style="width:${v/38*100}%"></div></div></div>`).join("")}
+</div>
+</div>
+<div class="sp2">
+<div class="lc"><div class="lct">IC conversion</div>
+<div class="cdr"><span style="flex:1;font-size:12px">Screened</span><b>92</b></div>
+<div class="cdr"><span style="flex:1;font-size:12px">One-pagers generated</span><b>31</b></div>
+<div class="cdr"><span style="flex:1;font-size:12px">Reached IC</span><b>6</b></div>
+<div class="cdr"><span style="flex:1;font-size:12px">Overall conversion</span><b>6.5%</b></div>
+<div class="cdr"><span style="flex:1;font-size:12px">One-pagers this quarter</span><b>9</b></div>
+</div>
+<div class="lc"><div class="lct">Coverage gaps</div>
+<div class="lr"><span class="cw2">&#9685;</span>Digital Infrastructure: 6 deals, 0 one-pagers</div>
+<div class="lr"><span class="cw2">&#9685;</span>Social Infrastructure: 3 deals, 0 one-pagers</div>
+<div class="lr"><span class="cw2">&#9685;</span>Germany: low conversion vs France</div>
+<div class="lr"><span class="cw2">&#9685;</span>4 advisers inactive 90+ days</div>
+<div class="lr"><span class="cw2">&#9685;</span>Southern Europe: under-represented</div>
+</div>
+</div>
+<div class="lc"><div class="lct">Active adviser ranking</div>
+<div class="tc" style="margin:0"><table><thead><tr><th>Adviser</th><th>Coverage sector</th><th>Deals brought</th><th>One-pagers</th></tr></thead><tbody>
+${advisers.map(a=>`<tr><td class="cn">${a[0]}</td><td class="m">${a[1]}</td><td>${a[2]}</td><td>${a[3]}</td></tr>`).join("")}
+</tbody></table></div></div>`;
+}
+
+// ─── HOW IT WORKS ─────────────────────────────────────────────────────────────
+function renderHiw(){
+  const ws=[
+    ["Deal Intake","Teaser pasted. Seven steps: extract fields with confidence scores, check decision memory, screen five criteria, enrich from sources, draft one-pager. Then: Approval A (content), Approval B (write to Salesforce, create SharePoint folder, append newsletter, add to decision memory). Humans review twice before data becomes persistent."],
+    ["Decision Memory","Fed by all approved knowledge: screening outputs, one-pagers, pipeline updates, forum discussions, IC materials, LP reports, relationship interactions. Search returns prior decision, reviewer, date, source type, and reasoning."],
+    ["Research Hub","Scans AlphaSense, PitchBook, Capital IQ, Pappers, Diane, and the web. Returns structured findings with companies, financials, thesis fit, and next steps."],
+    ["Newsletter","Pulls pipeline from Salesforce, calendar events, and climate/infra news. Formats to house template with five sections. Lead Partner approves, publishes to SharePoint."],
+    ["Relationship Intelligence","Full timeline for every contact before any action is taken. Detects stage (first contact, active, cooling, inactive). Generates personalised drafts. Never sends automatically. Draft placed unsent in email client."],
+    ["Fundraising Intelligence","Tracks prospective and active LPs, DDQ requests, and meeting briefings. Generates pre-meeting briefs and post-meeting follow-up drafts. Shows commitment pipeline vs fund target."],
+    ["Portfolio Value Creation","Per-company search across four modes: Acquisition Targets, Commercial Partners, Suppliers, Geographic Expansion. Returns structured PE-language comparables."],
+    ["LP Reporting","Four types: quarterly, monthly, annual, LP-specific. Three sections: A. Investment Activity, B. Portfolio Performance per company, C. Impact Dashboard (emissions, jobs, ESG, SDGs). CEO reviews before any LP receives."],
+    ["Coverage Dashboard","Sector, geography, adviser ranking, IC conversion, gap analysis. Auto-generated from pipeline data. Management view."],
+    ["Agent Activity Log","Every platform action logged with workflow, summary, detail, methodology, and timestamp. Write-once, immutable. Seven-year retention. Operations and CEO access only."]
+  ];
+  return`<div class="pt">How It Works</div><div class="ps">Plain-language guide to every workflow on the platform.</div>
+${ws.map(([n,d])=>`<div class="lc"><div class="lct">${n}</div><div style="font-size:12.5px;color:var(--md);line-height:1.65">${d}</div></div>`).join("")}`;
+}
+
+// ─── MUST DO / NEVER DO ───────────────────────────────────────────────────────
+function renderMustDo(){
+  const pp=[
+    {n:"Lead Partner",r:"Approval authority",m:["Approve one-pager proposals before any Salesforce write","Review every newsletter draft before publication","Set tier and sweet-spot classification personally","Review LP reports: all three sections before sending"],x:["Approve without checking field diff against teaser","Publish newsletter without reading Section 2"],wf:["Intake: verify extracted fields match teaser","Newsletter: confirm all events before approving","LP Reporting: review Investment Activity, Portfolio Performance, Impact sections"]},
+    {n:"Partner A",r:"Origination",m:["Validate extracted fields against teaser before Approval A","Update Salesforce next steps within 48 hours of any meeting","Check decision memory before approving any intake"],x:["Paste confidential IM documents into Research Hub","Approve intake without verifying company name in memory"],wf:["Intake: cross-check revenue and EBITDA against teaser","Relationship: confirm suppression list before outreach"]},
+    {n:"Partner B",r:"Screening",m:["Validate all extracted fields against teaser","Flag any discrepancy between draft and source teaser","Update stage in Salesforce after every interaction"],x:["Approve Approval A without confirming company identity","Skip memory check on intake"],wf:["Intake: cross-check revenue against teaser before Approval A","Pipeline: update next steps within 48 hours"]},
+    {n:"Analyst",r:"Platform and data",m:["Rotate API key every 90 days","Test all workflows on sample data before production","Review Data Quality tab weekly and flag to CEO","Check agent log for errors weekly"],x:["Hardcode API keys in any file or script","Access LP data without CEO authorisation","Run workflows on live Salesforce without prior test"],wf:["Intake: test on sample teaser before team use","Data Quality: review every Monday, report to CEO"]},
+    {n:"CEO",r:"Final authority",m:["Review all three LP report sections before any LP receives","Approve all new data source connections","Review agent log monthly","Confirm commitment pipeline figures monthly"],x:["Share login credentials outside the firm","Send LP report without personal review"],wf:["LP Reporting: review A, B, C sections in full","Fundraising: confirm pipeline figures every month"]}
+  ];
+  return`<div class="pt">Must Do / Never Do</div><div class="ps">Per role. General rules plus workflow-specific rules. Role codes: Lead Partner, Partner A, Partner B, Analyst, Operations, CEO.</div>
+${pp.map(p=>`<div class="govp">
+<div class="govh">${p.n}<span class="govrl">${p.r}</span></div>
+<div class="govbd">
+<div class="govs">Must do</div>${p.m.map(m=>`<div class="govi"><span class="ck">&#10003;</span>${m}</div>`).join("")}
+<div class="govs" style="margin-top:9px">Never do</div>${p.x.map(x=>`<div class="govi"><span style="color:var(--rd)">&#10007;</span>${x}</div>`).join("")}
+<div class="govs" style="margin-top:9px">Workflow-specific</div>${p.wf.map(w=>`<div class="govi"><span class="cs">&#9671;</span>${w}</div>`).join("")}
+<input class="inp" style="margin-top:7px" placeholder="Add note for ${p.n}...">
+<button class="bg2" style="margin:0;padding:5px 11px;font-size:12px;margin-top:0" onclick="la('Governance','Note for ${p.n}','ok');this.previousElementSibling.value='';this.textContent='Saved';setTimeout(()=>this.textContent='Save',1500)">Save</button>
+</div></div>`).join("")}`;
+}
+
+// ─── AGENT ACTIVITY LOG ───────────────────────────────────────────────────────
+function renderAlog(){
+  return`<div class="pt">Agent Activity Log</div>
+<div class="ps">Every platform action. Workflow, summary, detail, methodology, time. Write-once, immutable, seven-year retention.</div>
+<div class="sr">
+  <div class="sc" style="border-color:var(--gn)"><div class="sv">${aL.filter(l=>l.st==="ok").length}</div><div class="sl2">Completed</div></div>
+  <div class="sc" style="border-color:var(--am)"><div class="sv">${aL.filter(l=>l.st==="pn").length}</div><div class="sl2">Pending</div></div>
+  <div class="sc" style="border-color:var(--nv)"><div class="sv">${aL.length}</div><div class="sl2">Total actions</div></div>
+</div>
+${aL.length===0?'<div class="lc" style="color:var(--lt)">Run any workflow to see activity logged here.</div>':`
+<div class="tc"><table><thead><tr><th>Time</th><th>Workflow</th><th>Summary</th><th>Detail</th><th>Status</th></tr></thead><tbody>
+${aL.map(l=>`<tr><td class="m" style="white-space:nowrap">${l.t}</td><td class="cn">${l.w}</td><td style="font-size:12px">${l.s}</td><td style="font-size:11px;color:var(--md)">${l.dt}</td><td><span class="pill ${l.st==="ok"?"pg":"pw"}">${l.st==="ok"?"Done":"Pending"}</span></td></tr>`).join("")}
+</tbody></table></div>`}
+<div class="ib">Production: Azure Blob WORM storage. Seven-year immutable retention. Operations and CEO access only. GDPR: personal data referenced by ID, not stored in log.</div>`;
+}
+
+// ─── ACCESS AND STATUS ────────────────────────────────────────────────────────
+function renderStatus(){
+  const g=[
+    ["Salesforce",[["Connected App","l"],["Permission sets","l"],["MCP Server","p"]]],
+    ["Microsoft 365",[["SharePoint read","l"],["Calendar read","l"],["SharePoint write","w"],["Mail access","w"]]],
+    ["Azure",[["Key Vault","w"],["Function App","w"],["Power Automate","w"]]],
+    ["APIs",[["Pappers","w"],["AlphaSense","w"],["PitchBook","w"],["Capital IQ","w"]]],
+    ["AI Engine",[["API active","l"],["Organisation account","w"]]]
+  ];
+  const ic=s=>s==="l"?'<span class="ck">&#10003;</span>':'<span class="cw2">&#9685;</span>';
+  const lb=s=>s==="l"?'<span class="pill pg">Live</span>':s==="p"?'<span class="pill ppn">Pending</span>':'<span class="pill pw">Awaiting IT</span>';
+  return`<div class="pt">Access and Status</div>
+<div class="ps">Every system dependency and its current connection status. Most items are awaiting IT access, not further development.</div>
+<div class="sr">
+  <div class="sc" style="border-color:var(--gn)"><div class="sv">8</div><div class="sl2">Live</div></div>
+  <div class="sc" style="border-color:var(--am)"><div class="sv">10</div><div class="sl2">Awaiting IT</div></div>
+  <div class="sc" style="border-color:var(--bl)"><div class="sv">1</div><div class="sl2">Pending</div></div>
+</div>
+${g.map(x=>`<div class="lc" style="margin-bottom:9px"><div class="lct">${x[0]}</div>${x[1].map(r=>`<div class="lr">${ic(r[1])}<span style="flex:1">${r[0]}</span>${lb(r[1])}</div>`).join("")}</div>`).join("")}`;
+}
+
+// ─── DEAL DETAIL DRAWER ───────────────────────────────────────────────────────
+function openD(id){
+  const d=D.find(x=>x.id===id);
+  document.getElementById("dp").innerHTML=`
+<div style="display:flex;justify-content:space-between;margin-bottom:15px">
+  <div><div style="font-size:16px;font-weight:700;color:var(--nv)">${d.co}</div><div style="font-size:12.5px;color:var(--md);margin-top:2px">${d.cn} | ${d.sec}</div></div>
+  <button onclick="closeD()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--md);padding:0 4px">&#215;</button>
+</div>
+<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">${tb(d.tier)}${sg2(d.stage)}${ss2(d.s)}</div>
+${[["Lead",d.ld],["Adviser",d.adv],["Assigned",d.as],["Next step",d.nx]].map(f=>`<div style="margin-bottom:11px"><div style="font-size:10px;color:var(--lt);text-transform:uppercase;margin-bottom:2px">${f[0]}</div><div style="font-size:12.5px">${f[1]}</div></div>`).join("")}
+<div style="border-top:1px solid #eef2f8;padding-top:13px">
+  <div style="font-size:10px;color:var(--lt);text-transform:uppercase;margin-bottom:8px">Actions</div>
+  <div style="display:flex;flex-direction:column;gap:5px">
+    <button class="br2" style="margin:0;width:100%" onclick="go('intake');closeD()">Generate one-pager</button>
+    <button class="bs3" style="margin:0;width:100%" onclick="go('research');closeD()">Research this company</button>
+    <button class="bg2" style="margin:0;width:100%" onclick="go('memory');closeD()">Search memory</button>
+    <button class="bg2" style="margin:0;width:100%" onclick="go('pvc');closeD()">Portfolio synergy search</button>
+    <div style="margin-top:7px;font-size:10.5px;color:var(--lt);font-weight:600">Update stage or tier</div>
+    <div style="display:flex;gap:3px;flex-wrap:wrap">
+      ${["Tier 0","Tier S","Tier 1","Tier 2","Active","Standby","Classify"].map(t=>`<button class="qc">${t}</button>`).join("")}
+    </div>
+  </div>
+</div>`;
+  document.getElementById("dp").classList.add("open");
+  document.getElementById("ov2").classList.add("open");
+}
+function closeD(){document.getElementById("dp").classList.remove("open");document.getElementById("ov2").classList.remove("open");}
+
+// ─── ADMIN ────────────────────────────────────────────────────────────────────
+function openAdmin(){
+  const m=document.getElementById("aM"),i=document.getElementById("aI");
+  if(!aut){
+    i.innerHTML=`<h2>Admin</h2><p>Enter password to access API key settings.</p><label>Password</label><input class="mi" id="pwI" type="password" onkeydown="if(event.key==='Enter')chk()"><div class="mbt"><button class="mb mbg" onclick="closeA()">Cancel</button><button class="mb mbp" onclick="chk()">Unlock</button></div>`;
+  }else{
+    i.innerHTML=`<h2>Admin</h2><p>API key stored in browser session only. Not persisted.</p><label>API key</label><input class="mi" id="kI" type="password" value="${AK}"><label style="margin-top:11px">Change password</label><input class="mi" id="nPw" type="password" placeholder="Optional"><div style="margin-top:13px;font-size:12px;font-weight:600;margin-bottom:5px">Connection status</div>${[["AI Engine",AK?"Connected":"Disconnected"],["Salesforce","MCP pending"],["SharePoint","Read live"],["Calendar","Read live"]].map(s=>`<div class="sln"><span>${s[0]}</span><span style="color:${s[1].includes("live")||s[1]==="Connected"?"var(--gn)":"var(--am)"}">${s[1]}</span></div>`).join("")}<div class="mbt"><button class="mb mbg" onclick="closeA()">Close</button><button class="mb mbp" onclick="sav()">Save</button></div>`;
+  }
+  m.classList.add("open");
+}
+function closeA(){document.getElementById("aM").classList.remove("open");}
+function chk(){if(document.getElementById("pwI").value===APW){aut=true;openAdmin();}else{document.getElementById("pwI").style.borderColor="var(--rd)";document.getElementById("pwI").placeholder="Incorrect password";}}
+function sav(){
+  const k=document.getElementById("kI").value.trim(),np=document.getElementById("nPw").value.trim();
+  if(k)AK=k;if(np)APW=np;
+  document.getElementById("sdot").classList.toggle("on",!!AK);
+  document.getElementById("connL").textContent=AK?"Engine connected":"Connect API in Admin";
+  closeA();la("System","API key updated","ok");
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function go(v){
+  st.v=v;
+  document.querySelectorAll(".ni").forEach(n=>n.classList.toggle("active",n.dataset.v===v));
+  render();
+  document.querySelector(".ctn").scrollTop=0;
+}
+function render(){
+  const m={
+    digest:renderDigest,workflows:renderWorkflows,home:renderHome,
+    intake:renderIntake,pipeline:renderPipeline,newsletter:renderNewsletter,
+    memory:renderMemory,research:renderResearch,
+    rl:renderRl,fi:renderFi,
+    pvc:renderPvc,
+    lp:renderLp,coverage:renderCoverage,
+    hiw:renderHiw,mustdo:renderMustDo,alog:renderAlog,status:renderStatus
+  };
+  document.getElementById("C").innerHTML=(m[st.v]||renderDigest)();
+}
+
+document.querySelectorAll(".ni[data-v]").forEach(n=>n.addEventListener("click",()=>go(n.dataset.v)));
+document.getElementById("ov2").addEventListener("click",closeD);
+document.getElementById("aM").addEventListener("click",e=>{if(e.target.id==="aM")closeA();});
+document.addEventListener("input",e=>{if(e.target.id==="si2"){st.q=e.target.value;if(st.v==="pipeline")render();}});
+render();
+</script></body></html>
